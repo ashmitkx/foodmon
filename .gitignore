@@ -1,7 +1,7 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
 **/.vscode
-**/json-data
+**/add-data
 
 # dependencies
 **/node_modules

@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import RestaurantApi from '../api/restaurants.js';
+import restaurantsApi from '../api/restaurants.js';
 
 const router = Router();
 
-router.route('/').get(RestaurantApi.getRestaurants); // get restaurants
-router.route('/:id').get(RestaurantApi.getRestaurantById); // get a single restaurant's
+router.route('/').get(restaurantsApi.getRestaurants); // get restaurants
+router.route('/:ids').get(restaurantsApi.getRestaurantsByIds); // get a list of restaurant by Ids
 
 export default router;
