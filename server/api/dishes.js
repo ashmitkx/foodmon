@@ -16,17 +16,33 @@ const getDishes = async (req, res) => {
 
         // return 400 if restaurantId is an invalid ObjectId
         if (!isValidObjectId(restaurantId))
-            return res.status(400).json({ error: 'bad request' });
+            return res.status(400).json({ error: 'Invalid restaurantId' });
 
         query = { 'restaurant._id': { $eq: restaurantId } };
     } else if (req.query.keyword) query = { $text: { $search: req.query.keyword } };
 
-    Dishes.find(query)
-        .then(doc => res.json(doc))
+    let doc = await Dishes.find(query)
+        .then(doc => doc)
         .catch(e => {
             console.error(e);
             res.status(500).json({ error: 'server error' });
         });
+
+    if (!doc) return;
+
+    // Group dishes by restaurant section, if queriedby restaurantId
+    if (req.query.restaurantId) {
+        const groupedDoc = {};
+        doc.forEach(dish => {
+            const section = dish.restaurant.section;
+            if (!groupedDoc[section]) groupedDoc[section] = [];
+
+            groupedDoc[section].push(dish);
+        });
+        doc = groupedDoc;
+    }
+
+    res.json(doc);
 };
 
 /* 
@@ -37,7 +53,7 @@ const getDishesByIds = async (req, res) => {
 
     // return 400 if not all ids are invalid ObjectIds
     if (!ids.every(id => isValidObjectId(id)))
-        return res.status(400).json({ error: 'bad request' });
+        return res.status(400).json({ error: 'Invalid dishId(s)' });
 
     const query = { _id: { $in: ids } };
 
