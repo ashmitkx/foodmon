@@ -8,15 +8,11 @@ const validateUserId = async (req, res, next) => {
     const userId = req.params.id;
 
     // check if userId is a valid ObjectId
-    if (!isValidObjectId(userId))
-        return res.status(400).json({ error: 'Invalid userId' });
+    if (!isValidObjectId(userId)) return next({ status: 400, message: 'Invalid userId' });
 
     // check if userId exists in db
-    const count = await Users.countDocuments({ _id: userId }).catch(e => {
-        console.error(e);
-        res.status(500).json({ error: 'server error' });
-    });
-    if (count === 0) return res.status(404).json({ error: 'Not found' });
+    const count = await Users.countDocuments({ _id: userId }).catch(next);
+    if (count === 0) next({ status: 404 });
 
     next();
 };
@@ -24,7 +20,7 @@ const validateUserId = async (req, res, next) => {
 /* 
     Returns the cart details of the user specified by userId.
 */
-const getUserCart = async (req, res) => {
+const getUserCart = async (req, res, next) => {
     const userId = req.params.id;
 
     const pipeline = [
@@ -55,16 +51,13 @@ const getUserCart = async (req, res) => {
 
             res.json(doc);
         })
-        .catch(e => {
-            console.error(e);
-            res.status(500).json({ error: 'server error' });
-        });
+        .catch(next);
 };
 
 /* 
     Returns the recent order details of the user specified by userId.
 */
-const getUserRecent = async (req, res) => {
+const getUserRecent = async (req, res, next) => {
     const userId = req.params.id;
 
     const pipeline = [
@@ -97,32 +90,31 @@ const getUserRecent = async (req, res) => {
             doc.recent = doc.recent.reverse();
             res.json(doc);
         })
-        .catch(e => {
-            console.error(e);
-            res.status(500).json({ error: 'server error' });
-        });
+        .catch(next);
 };
 
-const updateUserCart = async (req, res) => {
+const updateUserCart = async (req, res, next) => {
     const userId = req.params.id,
-        _id = req.body.id,
+        dishId = req.body.id,
         quantity = req.body.quantity;
 
-    // If specified quantity is <= 0, then remove the item from cart array
+    if (!dishId || !quantity)
+        return next({ status: 400, message: 'Incomplete request body' });
+
+    if (!isValidObjectId(dishId)) return next({ status: 400, message: 'Invalid dishId' });
+
     if (quantity <= 0) {
-        await Users.updateOne({ _id: userId }, { $pull: { cart: { _id } } })
+        // If specified quantity is <= 0, then remove the item from cart array
+        await Users.updateOne({ _id: userId }, { $pull: { cart: { _id: dishId } } })
             .then(() => res.status(204).send())
-            .catch(e => {
-                console.error(e);
-                res.status(500).json({ error: 'server error' });
-            });
+            .catch(next);
         return;
     }
 
     // Add the dish obj into the cart, only if it doesnt exist
     Users.updateOne(
-        { _id: userId, 'cart._id': { $ne: _id } },
-        { $push: { cart: { _id, quantity } } }
+        { _id: userId, 'cart._id': { $ne: dishId } },
+        { $push: { cart: { _id: dishId, quantity } } }
     )
         .then(result => {
             // Check if the adding the dish object was successful
@@ -131,18 +123,15 @@ const updateUserCart = async (req, res) => {
             // If adding the dish object was unsuccessful, that means that the object already exists.
             // Hence, update the object
             return Users.updateOne(
-                { _id: userId, 'cart._id': _id },
+                { _id: userId, 'cart._id': dishId },
                 { $set: { 'cart.$.quantity': quantity } }
             );
         })
         .then(() => res.status(204).send())
-        .catch(e => {
-            console.error(e);
-            res.status(500).json({ error: 'server error' });
-        });
+        .catch(next);
 };
 
-const emptyUserCart = async (req, res) => {
+const emptyUserCart = async (req, res, next) => {
     const userId = req.params.id;
 
     // get cart array of user
@@ -154,10 +143,7 @@ const emptyUserCart = async (req, res) => {
         // empty the cart array
         .then(() => Users.updateOne({ _id: userId }, { $set: { cart: [] } }))
         .then(() => res.status(204).send())
-        .catch(e => {
-            console.error(e);
-            res.status(500).json({ error: 'server error' });
-        });
+        .catch(next);
 };
 
 const usersApi = {
