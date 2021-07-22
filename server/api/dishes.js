@@ -21,28 +21,26 @@ const getDishes = async (req, res) => {
         query = { 'restaurant._id': { $eq: restaurantId } };
     } else if (req.query.keyword) query = { $text: { $search: req.query.keyword } };
 
-    let doc = await Dishes.find(query)
-        .then(doc => doc)
+    Dishes.find(query)
+        .then(doc => {
+            // Group dishes by restaurant section, if queriedby restaurantId
+            if (req.query.restaurantId) {
+                const groupedDoc = {};
+                doc.forEach(dish => {
+                    const section = dish.restaurant.section;
+                    if (!groupedDoc[section]) groupedDoc[section] = [];
+
+                    groupedDoc[section].push(dish);
+                });
+                doc = groupedDoc;
+            }
+
+            res.json(doc);
+        })
         .catch(e => {
             console.error(e);
             res.status(500).json({ error: 'server error' });
         });
-
-    if (!doc) return;
-
-    // Group dishes by restaurant section, if queriedby restaurantId
-    if (req.query.restaurantId) {
-        const groupedDoc = {};
-        doc.forEach(dish => {
-            const section = dish.restaurant.section;
-            if (!groupedDoc[section]) groupedDoc[section] = [];
-
-            groupedDoc[section].push(dish);
-        });
-        doc = groupedDoc;
-    }
-
-    res.json(doc);
 };
 
 /* 
@@ -55,9 +53,7 @@ const getDishesByIds = async (req, res) => {
     if (!ids.every(id => isValidObjectId(id)))
         return res.status(400).json({ error: 'Invalid dishId(s)' });
 
-    const query = { _id: { $in: ids } };
-
-    Dishes.find(query)
+    Dishes.find({ _id: { $in: ids } })
         .then(doc => res.json(doc))
         .catch(e => {
             console.error(e);
@@ -65,5 +61,5 @@ const getDishesByIds = async (req, res) => {
         });
 };
 
-const dishesApi = { getDishes, getDishesByIds };
+const dishesApi = { getDishes };
 export default dishesApi;

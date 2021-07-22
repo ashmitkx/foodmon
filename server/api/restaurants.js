@@ -38,11 +38,9 @@ const getRestaurantsByIds = async (req, res) => {
 
     // return 400 if not all ids are invalid ObjectIds
     if (!ids.every(id => isValidObjectId(id)))
-        return res.status(400).json({ error: 'bad request' });
+        return res.status(400).json({ error: 'Invalid restaurantId(s)' });
 
-    const query = { _id: { $in: ids } };
-
-    Restaurants.find(query)
+    Restaurants.find({ _id: { $in: ids } })
         .then(doc => res.json(doc))
         .catch(e => {
             console.error(e);
