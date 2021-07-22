@@ -23,7 +23,7 @@ const userSchema = new mongoose.Schema({
             quantity: {
                 type: Number,
                 default: 1,
-                min: 0
+                min: 1
             }
         }
     ],
@@ -33,7 +33,11 @@ const userSchema = new mongoose.Schema({
             quantity: {
                 type: Number,
                 default: 1,
-                min: 0
+                min: 1
+            },
+            added: {
+                type: Date,
+                default: new Date()
             }
         }
     ],

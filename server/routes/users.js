@@ -1,12 +1,20 @@
 import { Router } from 'express';
 import usersApi from '../api/users.js';
 
-const router = Router();
+const usersRoute = Router();
+const specificUserRoute = Router({ mergeParams: true });
 
-router.route('/').post((_, res) => res.send('/ : post')); // create new user
+usersRoute.use('/:id', specificUserRoute);
+usersRoute.route('/').post((_, res) => res.send('/ : post')); // create new user
 
-router.route('/:id').get((req, res) => res.send(`/${req.params.id} : get`)); // get basic user data
+// Access a specific user data
+specificUserRoute.use(usersApi.validateUserId); // check userId for validity and existance
+specificUserRoute.route('/').get((req, res) => res.send(`/${req.params.id} : get`)); // get basic user data
+specificUserRoute
+    .route('/cart')
+    .get(usersApi.getUserCart) // get card data
+    .put(usersApi.updateUserCart) // update cart data
+    .delete(usersApi.emptyUserCart); // empty cart (and save contents into recent)
+specificUserRoute.route('/recent').get(usersApi.getUserRecent); // get recent orders data
 
-router.route('/:id/:resource').get(usersApi.getUserResource).patch().delete();
-
-export default router;
+export default usersRoute;
