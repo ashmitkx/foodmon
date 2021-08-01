@@ -1,0 +1,51 @@
+.restaurant {
+  background: #f4f3ed;
+  box-shadow: 2px 15px 30px 1px rgba(146, 146, 146, 0.2);
+  border-radius: 16px;
+  padding: 1em;
+  display: flex;
+  gap: 1.25em;
+  max-width: 24em;
+}
+.restaurant .img {
+  width: 6em;
+  height: 6em;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+.restaurant .details {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  gap: 0.25em;
+}
+.restaurant .img {
+  order: 1;
+}
+
+.top {
+  display: flex;
+  flex-flow: column;
+  gap: 0.25em;
+}
+.top .cuisines {
+  font-size: 0.875rem;
+  color: rgba(34, 34, 34, 0.5);
+}
+
+.bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+.info svg {
+  color: #e65d03;
+  width: 1.125em;
+}

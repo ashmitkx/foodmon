@@ -1,0 +1,38 @@
+@use '../../common';
+
+.restaurant {
+    @include common.card;
+    max-width: 24em;
+
+    .img {
+        order: 1;
+    }
+}
+
+.top {
+    display: flex;
+    flex-flow: column;
+    gap: 0.25em;
+
+    .cuisines {
+        font-size: 0.875rem;
+        color: common.$text-faded;
+    }
+}
+
+.bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+
+    svg {
+        color: common.$primary;
+        width: 1.125em;
+    }
+}

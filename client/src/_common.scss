@@ -1,0 +1,34 @@
+$background: #f4f3ed;
+$primary: #e65d03;
+$primary-faded: rgba(249, 99, 0, 0.08);
+$text-faded: rgba(34, 34, 34, 0.5);
+$text-dark: #222222;
+$text-white: #f2f2f2;
+
+$card-shadow: 2px 15px 30px 1px rgba(146, 146, 146, 0.2);
+
+@mixin card {
+    background: $background;
+    box-shadow: $card-shadow;
+
+    border-radius: 16px;
+    padding: 1em;
+
+    display: flex;
+    gap: 1.25em;
+
+    .img {
+        width: 6em;
+        height: 6em;
+        border-radius: 12px;
+        flex-shrink: 0;
+    }
+
+    .details {
+        flex-grow: 1;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        gap: 0.25em;
+    }
+}
