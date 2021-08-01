@@ -1,0 +1,77 @@
+@use './common';
+
+/* ========
+	Resets
+	======= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+img {
+    display: block;
+    object-fit: cover;
+}
+
+svg {
+    display: block;
+    width: inherit;
+    height: inherit;
+}
+
+button {
+    color: inherit;
+    background: none;
+    font: inherit;
+    outline: none;
+    border: none;
+    cursor: pointer;
+
+    // &:disabled {
+    //   cursor: not-allowed;
+    //   pointer-events: none;
+    // }
+}
+
+a {
+    color: inherit;
+    font: inherit;
+    text-decoration: none;
+}
+
+ul {
+    list-style: none;
+}
+
+// input[type='text'] {
+//   background: inherit;
+//   font: inherit;
+//   color: inherit;
+//   border: 0;
+//   outline: 0;
+//   display: block;
+//   width: 100%;
+// }
+
+/* ===============
+	Global Styles
+	=============== */
+
+body {
+    font-family: Ubuntu, sans-serif;
+    color: common.$text-dark;
+    background: common.$background;
+    overflow-y: scroll;
+}
+
+h1 {
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+h2 {
+    font-weight: 500;
+    font-size: 1.25rem;
+}

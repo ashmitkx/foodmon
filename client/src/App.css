@@ -1,0 +1,59 @@
+/* ========
+	Resets
+	======= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+svg {
+  display: block;
+  width: inherit;
+  height: inherit;
+}
+
+button {
+  color: inherit;
+  background: none;
+  font: inherit;
+  outline: none;
+  border: none;
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
+  font: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}
+
+/* ===============
+	Global Styles
+	=============== */
+body {
+  font-family: Ubuntu, sans-serif;
+  color: #222222;
+  background: #f4f3ed;
+  overflow-y: scroll;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+h2 {
+  font-weight: 500;
+  font-size: 1.25rem;
+}
