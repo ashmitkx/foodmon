@@ -2,7 +2,6 @@
 
 .restaurant {
     @include common.card;
-    max-width: 24em;
 
     .img {
         order: 1;

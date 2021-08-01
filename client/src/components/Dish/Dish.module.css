@@ -1,11 +1,10 @@
 .dish {
   background: #f4f3ed;
-  box-shadow: 2px 15px 30px 1px rgba(146, 146, 146, 0.2);
+  box-shadow: 0px 8px 16px 1px rgba(170, 170, 170, 0.25);
   border-radius: 16px;
   padding: 1em;
   display: flex;
   gap: 1.25em;
-  max-width: 23em;
 }
 .dish .img {
   width: 6em;

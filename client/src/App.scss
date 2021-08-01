@@ -45,6 +45,10 @@ ul {
     list-style: none;
 }
 
+hr {
+    border: none;
+}
+
 // input[type='text'] {
 //   background: inherit;
 //   font: inherit;
@@ -63,7 +67,6 @@ body {
     font-family: Ubuntu, sans-serif;
     color: common.$text-dark;
     background: common.$background;
-    overflow-y: scroll;
 }
 
 h1 {

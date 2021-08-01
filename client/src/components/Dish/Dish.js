@@ -21,7 +21,7 @@ const Dish = ({ dish }) => {
                 </div>
 
                 <div className={cx('bottom')}>
-                    <span className={cx('price')}>{dish.price * dish.quantity}</span>
+                    <span className={cx('price')}>₹ {dish.price * dish.quantity}</span>
                     <div className={cx('quantity')}>
                         <button>
                             <FiPlus />

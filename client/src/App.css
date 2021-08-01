@@ -38,6 +38,10 @@ ul {
   list-style: none;
 }
 
+hr {
+  border: none;
+}
+
 /* ===============
 	Global Styles
 	=============== */
@@ -45,7 +49,6 @@ body {
   font-family: Ubuntu, sans-serif;
   color: #222222;
   background: #f4f3ed;
-  overflow-y: scroll;
 }
 
 h1 {
