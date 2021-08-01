@@ -12,6 +12,12 @@ const userSchema = new mongoose.Schema({
         trim: true,
         unique: true
     },
+    googleId: {
+        type: String,
+        required: true,
+        trim: true,
+        unique: true
+    },
     imgUrl: {
         type: String,
         required: true,
@@ -19,7 +25,7 @@ const userSchema = new mongoose.Schema({
     },
     cart: [
         {
-            _id: { type: mongoose.ObjectId, unique: true },
+            _id: mongoose.ObjectId,
             quantity: {
                 type: Number,
                 default: 1,
@@ -29,7 +35,7 @@ const userSchema = new mongoose.Schema({
     ],
     recent: [
         {
-            _id: { type: mongoose.ObjectId, unique: true },
+            _id: mongoose.ObjectId,
             quantity: {
                 type: Number,
                 default: 1,
@@ -40,11 +46,7 @@ const userSchema = new mongoose.Schema({
                 default: new Date()
             }
         }
-    ],
-    favourites: {
-        restaurants: { type: [mongoose.ObjectId], unique: true },
-        dishes: { type: [mongoose.ObjectId], unique: true }
-    }
+    ]
 });
 
 const User = mongoose.model('user', userSchema);
