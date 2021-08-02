@@ -1,9 +1,5 @@
 @use '../../common';
 
-.dish {
-    @include common.card;
-}
-
 .top {
     display: flex;
     flex-flow: column;

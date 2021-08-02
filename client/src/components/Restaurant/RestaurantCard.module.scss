@@ -1,13 +1,5 @@
 @use '../../common';
 
-.restaurant {
-    @include common.card;
-
-    .img {
-        order: 1;
-    }
-}
-
 .top {
     display: flex;
     flex-flow: column;
