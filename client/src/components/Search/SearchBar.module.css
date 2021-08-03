@@ -1,0 +1,29 @@
+.search {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+  max-width: 28em;
+}
+.search input {
+  order: 1;
+  font-size: 1.125rem;
+  padding: 0.25em;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 75ms ease-in;
+}
+.search input::-moz-placeholder {
+  color: rgba(34, 34, 34, 0.5);
+}
+.search input:-ms-input-placeholder {
+  color: rgba(34, 34, 34, 0.5);
+}
+.search input::placeholder {
+  color: rgba(34, 34, 34, 0.5);
+}
+.search input:focus {
+  border-bottom: 2px solid #e65d03;
+}
+.search svg {
+  color: #e65d03;
+  height: 1.6em;
+}

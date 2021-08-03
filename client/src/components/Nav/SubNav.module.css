@@ -1,0 +1,22 @@
+.subnav ul {
+  display: flex;
+  gap: 2.25em;
+}
+.subnav a {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  padding: 0.625em 1em;
+  font-size: 1.25rem;
+}
+.subnav a.--active {
+  background-color: rgba(249, 99, 0, 0.08);
+  border-radius: 8px;
+}
+.subnav svg {
+  height: 1em;
+  color: #e65d03;
+}
+.subnav svg.--cuisine {
+  height: 1.2em;
+}

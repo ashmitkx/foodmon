@@ -1,0 +1,31 @@
+.main-nav {
+  height: 100vh;
+  position: sticky;
+  top: 0;
+  padding: 1em 0.5em;
+}
+.main-nav,
+.main-nav ul {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 1.5em;
+}
+.main-nav a,
+.main-nav .logo {
+  padding: 0.8em;
+}
+.main-nav a.--active {
+  background-color: rgba(249, 99, 0, 0.08);
+  border-radius: 8px;
+}
+.main-nav svg,
+.main-nav img {
+  height: 1.7em;
+}
+.main-nav svg {
+  color: #e65d03;
+}
+.main-nav img {
+  border-radius: 50px;
+}

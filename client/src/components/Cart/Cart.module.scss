@@ -3,12 +3,12 @@
 .cart {
     min-width: 27em;
     width: 27.5%;
-    height: 100vh;
     padding: 1.25em;
 
-    position: fixed;
-    right: 0;
+    height: 100vh;
+    position: sticky;
     top: 0;
+    left: 0;
 
     display: flex;
     flex-flow: column;
@@ -22,6 +22,7 @@
     padding: 0 1.25em 1em 1.25em;
 
     scrollbar-width: thin;
+    scrollbar-color: common.$primary-kinda-faded transparent;
     display: flex;
     flex-flow: column;
     gap: 1.25em;
@@ -57,7 +58,7 @@
 
     svg {
         color: common.$primary;
-        height: 1.75em;
+        height: 1.5em;
     }
 }
 

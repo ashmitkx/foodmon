@@ -36,6 +36,7 @@ button {
 }
 
 a {
+    display: block;
     color: inherit;
     font: inherit;
     text-decoration: none;
@@ -49,15 +50,15 @@ hr {
     border: none;
 }
 
-// input[type='text'] {
-//   background: inherit;
-//   font: inherit;
-//   color: inherit;
-//   border: 0;
-//   outline: 0;
-//   display: block;
-//   width: 100%;
-// }
+input[type='text'] {
+    background: none;
+    border: none;
+    outline: none;
+    display: block;
+    font: inherit;
+    color: inherit;
+    width: 100%;
+}
 
 /* ===============
 	Global Styles
@@ -67,14 +68,33 @@ body {
     font-family: Ubuntu, sans-serif;
     color: common.$text-dark;
     background: common.$background;
+    max-width: 130rem;
+    margin: 0 auto;
 }
 
 h1 {
-    font-weight: 700;
-    font-size: 2rem;
+    font-weight: 600;
+    font-size: 1.75rem;
 }
 
 h2 {
     font-weight: 500;
     font-size: 1.25rem;
+}
+
+/* ============ 
+    App Layout
+    =========== */
+
+#root {
+    display: flex;
+}
+
+main {
+    flex-grow: 1;
+    padding: 1.25em;
+
+    display: flex;
+    flex-flow: column;
+    gap: 1.75em;
 }

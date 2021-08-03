@@ -1,0 +1,29 @@
+@use '../../common';
+
+.search {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    max-width: 28em;
+
+    input {
+        order: 1;
+        font-size: 1.125rem;
+        padding: 0.25em;
+
+        &::placeholder {
+            color: common.$text-faded;
+        }
+
+        border-bottom: 2px solid transparent;
+        transition: border-bottom 75ms ease-in;
+        &:focus {
+            border-bottom: 2px solid common.$primary;
+        }
+    }
+
+    svg {
+        color: common.$primary;
+        height: 1.6em;
+    }
+}

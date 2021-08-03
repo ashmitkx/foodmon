@@ -1,0 +1,40 @@
+@use '../../common';
+
+.main-nav {
+    height: 100vh;
+    position: sticky;
+    top: 0;
+
+    padding: 1em 0.5em;
+
+    &,
+    ul {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        gap: 1.5em;
+    }
+
+    a,
+    .logo {
+        padding: 0.8em;
+    }
+
+    a.--active {
+        background-color: common.$primary-faded;
+        border-radius: 8px;
+    }
+
+    svg,
+    img {
+        height: 1.7em;
+    }
+
+    svg {
+        color: common.$primary;
+    }
+
+    img {
+        border-radius: 50px;
+    }
+}

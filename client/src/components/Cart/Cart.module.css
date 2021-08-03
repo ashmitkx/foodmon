@@ -1,11 +1,11 @@
 .cart {
   min-width: 27em;
   width: 27.5%;
-  height: 100vh;
   padding: 1.25em;
-  position: fixed;
-  right: 0;
+  height: 100vh;
+  position: sticky;
   top: 0;
+  left: 0;
   display: flex;
   flex-flow: column;
   gap: 1.25em;
@@ -17,6 +17,7 @@
   margin: 0 -1.25em;
   padding: 0 1.25em 1em 1.25em;
   scrollbar-width: thin;
+  scrollbar-color: rgba(249, 99, 0, 0.75) transparent;
   display: flex;
   flex-flow: column;
   gap: 1.25em;
@@ -41,14 +42,14 @@
   top: -2.5em;
   left: 45%;
   background-color: #f4f3ed;
-  box-shadow: 0px 8px 16px 1px rgba(170, 170, 170, 0.25);
+  box-shadow: 0px 8px 20px 1px rgba(170, 170, 170, 0.3);
   border-radius: 50px;
   padding: 0.5em;
   z-index: 999;
 }
 .scroll svg {
   color: #e65d03;
-  height: 1.75em;
+  height: 1.5em;
 }
 
 .price {

@@ -1,0 +1,31 @@
+@use '../../common';
+
+.subnav {
+    ul {
+        display: flex;
+        gap: 2.25em;
+    }
+
+    a {
+        display: flex;
+        align-items: center;
+        gap: 0.75em;
+
+        padding: 0.625em 1em;
+        font-size: 1.25rem;
+
+        &.--active {
+            background-color: common.$primary-faded;
+            border-radius: 8px;
+        }
+    }
+
+    svg {
+        height: 1em;
+        color: common.$primary;
+
+        &.--cuisine {
+            height: 1.2em;
+        }
+    }
+}
