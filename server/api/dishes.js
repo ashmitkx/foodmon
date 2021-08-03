@@ -8,36 +8,48 @@ const isValidObjectId = mongoose.isValidObjectId;
     The dishes collection can be queried for a cuisine, for a restaurantId, or for a particular keyword.
 */
 const getDishes = async (req, res, next) => {
-    let query = {};
-    if (req.query.cuisine)
-        query = { cuisines: { $elemMatch: { $eq: req.query.cuisine } } };
+    let query = {},
+        groupby;
+
+    if (req.query.cuisine) query = { cuisines: { $elemMatch: { $eq: req.query.cuisine } } };
     else if (req.query.restaurantId) {
         const restaurantId = req.query.restaurantId;
-
         // return 400 if restaurantId is an invalid ObjectId
         if (!isValidObjectId(restaurantId))
             return next({ status: 400, message: 'Invalid restaurantId' });
 
         query = { 'restaurant._id': { $eq: restaurantId } };
+        groupby = 'section'; // Also group dishes by restaurant section
     } else if (req.query.keyword) query = { $text: { $search: req.query.keyword } };
 
-    Dishes.find(query)
-        .then(doc => {
-            // Group dishes by restaurant section, if queriedby restaurantId
-            if (req.query.restaurantId) {
-                const groupedDoc = {};
-                doc.forEach(dish => {
-                    const section = dish.restaurant.section;
-                    if (!groupedDoc[section]) groupedDoc[section] = [];
+    // Override groupby if groupby is explicitly specified in the request
+    groupby = req.query.groupby || groupby;
 
-                    groupedDoc[section].push(dish);
-                });
-                doc = groupedDoc;
-            }
+    let doc;
+    try {
+        doc = await Dishes.find(query);
+    } catch (err) {
+        return next(err);
+    }
 
-            res.json(doc);
-        })
-        .catch(next);
+    switch (groupby) {
+        // Group dishes by the restaurant section, if specified.
+        case 'section':
+            const groupedDoc = {};
+            doc.forEach(dish => {
+                const section = dish.restaurant.section;
+                if (!groupedDoc[section]) groupedDoc[section] = [];
+                groupedDoc[section].push(dish);
+            });
+
+            doc = groupedDoc;
+            break;
+
+        default:
+        // Do nothing
+    }
+
+    res.json(doc);
 };
 
 /* 
