@@ -32,6 +32,10 @@ const App = () => {
                 <ConditionalRoute path='/profile' condition={isAuth} redirect='/login'>
                     Profile
                 </ConditionalRoute>
+                {/* Catch all unknown routes and redirect to / */}
+                <Route path='/*'>
+                    <Redirect to='/' />
+                </Route>
             </Switch>
             {isAuth && <Cart />}
         </Router>

@@ -12,12 +12,7 @@ const RestaurantCard = ({ restaurant }) => {
         <Card reverse img={{ src: restaurant.imgUrl, alt: 'restaurant img' }}>
             <div className={cx('top')}>
                 <h2>{restaurant.name}</h2>
-                <span className={cx('cuisines')}>
-                    {/* Capitalize first letter of each cuisine and join them with ', ' */}
-                    {restaurant.cuisines
-                        .map(cuisine => cuisine[0].toUpperCase() + cuisine.slice(1))
-                        .join(', ')}
-                </span>
+                <span className={cx('cuisines')}>{restaurant.cuisines.join(', ')}</span>
             </div>
 
             <div className={cx('bottom')}>

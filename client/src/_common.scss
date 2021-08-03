@@ -1,9 +1,15 @@
 $background: #f4f3ed;
 $primary: #e65d03;
-$primary-kinda-faded: rgba(249, 99, 0, 0.75);
+$primary-kinda-faded: rgba(249, 99, 0, 0.5);
 $primary-faded: rgba(249, 99, 0, 0.08);
 $text-faded: rgba(34, 34, 34, 0.5);
-$text-dark: #222222;
+$text-dark: #2b2b2b;
 $text-white: #f2f2f2;
 
 $card-shadow: 0px 8px 20px 1px rgba(170, 170, 170, 0.3);
+
+@mixin themed-scrollbar {
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: $primary-kinda-faded transparent;
+}

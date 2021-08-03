@@ -17,12 +17,11 @@
 
 .dishes {
     flex-grow: 1;
-    overflow-y: scroll;
     margin: 0 -1.25em;
     padding: 0 1.25em 1em 1.25em;
 
-    scrollbar-width: thin;
-    scrollbar-color: common.$primary-kinda-faded transparent;
+    @include common.themed-scrollbar;
+
     display: flex;
     flex-flow: column;
     gap: 1.25em;

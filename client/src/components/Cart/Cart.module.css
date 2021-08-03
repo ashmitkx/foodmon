@@ -13,11 +13,11 @@
 
 .dishes {
   flex-grow: 1;
-  overflow-y: scroll;
   margin: 0 -1.25em;
   padding: 0 1.25em 1em 1.25em;
+  overflow-y: scroll;
   scrollbar-width: thin;
-  scrollbar-color: rgba(249, 99, 0, 0.75) transparent;
+  scrollbar-color: rgba(249, 99, 0, 0.5) transparent;
   display: flex;
   flex-flow: column;
   gap: 1.25em;
