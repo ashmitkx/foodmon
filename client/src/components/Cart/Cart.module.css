@@ -33,7 +33,7 @@
   position: relative;
 }
 .prices hr {
-  background-color: rgba(34, 34, 34, 0.5);
+  background-color: rgba(34, 34, 34, 0.45);
   height: 2px;
 }
 
@@ -60,7 +60,7 @@
 .price-name {
   font-weight: 500;
   font-size: 1.125rem;
-  color: rgba(34, 34, 34, 0.5);
+  color: rgba(34, 34, 34, 0.45);
 }
 .price-value {
   font-weight: 500;

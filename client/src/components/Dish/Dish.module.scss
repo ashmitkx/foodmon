@@ -3,10 +3,11 @@
 .top {
     display: flex;
     flex-flow: column;
-    gap: 0.25em;
+    gap: 0.15em;
 
     .restaurant-name {
-        font-size: 0.875rem;
+        font-weight: 500;
+        font-size: 0.9rem;
         color: common.$text-faded;
     }
 

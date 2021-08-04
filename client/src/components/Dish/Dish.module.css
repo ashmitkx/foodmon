@@ -1,13 +1,14 @@
 .top {
   display: flex;
   flex-flow: column;
-  gap: 0.25em;
+  gap: 0.15em;
   position: relative;
   padding-right: 1.5em;
 }
 .top .restaurant-name {
-  font-size: 0.875rem;
-  color: rgba(34, 34, 34, 0.5);
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: rgba(34, 34, 34, 0.45);
 }
 .top .veg-option {
   width: 1em;

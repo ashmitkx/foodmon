@@ -4,8 +4,10 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import SearchBar from '../Search/SearchBar.js';
 import SubNav from '../Nav/SubNav.js';
 import RestaurantCard from '../Restaurant/RestaurantCard.js';
+import Dish from '../Dish/Dish.js';
 import CardsDisplay from '../Layouts/CardsDisplay.js';
 import restaurantsApi from '../../api/restaurants';
+import usersApi from '../../api/users.js';
 
 const SortedRestaurants = ({ sortby }) => {
     const [restaurants, setRestaurants] = useState([]);
@@ -32,6 +34,13 @@ const SortedRestaurants = ({ sortby }) => {
 };
 
 const GroupedRestaurants = ({ groupby }) => {
+    const cuisineEmojis = {
+        PIZZA: '🍕',
+        CHINESE: '🥡',
+        SANDWICHES: '🥪',
+        BURGERS: '🍔'
+    };
+
     const [restaurantGroups, setRestaurantGroups] = useState({});
 
     useEffect(() => {
@@ -47,12 +56,51 @@ const GroupedRestaurants = ({ groupby }) => {
     }, [groupby]);
 
     return Object.entries(restaurantGroups).map(([cuisine, restaurants]) => (
-        <CardsDisplay title={cuisine} key={cuisine}>
+        <CardsDisplay title={`${cuisineEmojis[cuisine.toUpperCase()]} ${cuisine}`} key={cuisine}>
             {restaurants.map(restaurant => (
                 <RestaurantCard key={restaurant._id} restaurant={restaurant} />
             ))}
         </CardsDisplay>
     ));
+};
+
+const Recents = () => {
+    const [dateGroups, setDateGroups] = useState({});
+
+    useEffect(() => {
+        const getRecentDishes = async () => {
+            try {
+                const res = await usersApi.getRecent('61045a5df4ecda2f10e889c7');
+                setDateGroups(res.data.recent);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        getRecentDishes();
+    }, []);
+
+    return Object.entries(dateGroups).map(([date, dishes]) => {
+        const options = {
+            weekday: 'short',
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true
+        };
+        const [dayName, dayDate, time] = new Date(Number(date))
+            .toLocaleString('en-GB', options)
+            .split(', ');
+
+        return (
+            <CardsDisplay title={`${dayName}, ${dayDate}`} subtitle={time} key={date}>
+                {dishes.map(dish => (
+                    <Dish key={dish._id} dish={dish} />
+                ))}
+            </CardsDisplay>
+        );
+    });
 };
 
 const Home = () => {
@@ -73,7 +121,9 @@ const Home = () => {
                 <Route path='/home/cuisines'>
                     <GroupedRestaurants groupby='cuisine' />
                 </Route>
-                <Route path='/home/recent'></Route>
+                <Route path='/home/recent'>
+                    <Recents />
+                </Route>
                 {/* Catch all unknown routes and redirect to /home */}
                 <Route path='/home/*'>
                     <Redirect to='/home' />

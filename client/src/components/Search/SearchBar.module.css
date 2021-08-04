@@ -12,13 +12,13 @@
   transition: border-bottom 75ms ease-in;
 }
 .search input::-moz-placeholder {
-  color: rgba(34, 34, 34, 0.5);
+  color: rgba(34, 34, 34, 0.45);
 }
 .search input:-ms-input-placeholder {
-  color: rgba(34, 34, 34, 0.5);
+  color: rgba(34, 34, 34, 0.45);
 }
 .search input::placeholder {
-  color: rgba(34, 34, 34, 0.5);
+  color: rgba(34, 34, 34, 0.45);
 }
 .search input:focus {
   border-bottom: 2px solid #e65d03;
