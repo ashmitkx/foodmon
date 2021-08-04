@@ -43,7 +43,7 @@ const userSchema = new mongoose.Schema({
             },
             added: {
                 type: Date,
-                default: new Date()
+                default: () => new Date()
             }
         }
     ]

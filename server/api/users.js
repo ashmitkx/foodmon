@@ -42,7 +42,7 @@ const getUserCart = async (req, res, next) => {
         .then(doc => {
             doc = doc[0];
 
-            // Merge the resource and dish_data arrays by Id, then delete the dish_data array
+            // Merge the resource and dish_data arrays by Id, then delete the dishes array
             doc.cart = doc.cart.map(cart_item => ({
                 ...cart_item,
                 ...doc.dishes.find(dish => cart_item._id.equals(dish._id))
@@ -75,22 +75,42 @@ const getUserRecent = async (req, res, next) => {
         }
     ];
 
-    Users.aggregate(pipeline)
-        .then(doc => {
-            doc = doc[0];
+    let doc;
+    try {
+        doc = await Users.aggregate(pipeline);
+        doc = doc[0];
+    } catch (err) {
+        return next(err);
+    }
 
-            // Merge the resource and dish_data arrays by Id, then delete the dish_data array
-            doc.recent = doc.recent.map(recent_item => ({
-                ...recent_item,
-                ...doc.dishes.find(dish => recent_item._id.equals(dish._id))
-            }));
-            delete doc.dishes;
+    // Merge the resource and dish_data arrays by Id, then delete the dishes array
+    doc.recent = doc.recent.map(recent_item => ({
+        ...recent_item,
+        ...doc.dishes.find(dish => recent_item._id.equals(dish._id))
+    }));
+    delete doc.dishes;
 
-            // Reverse the recent array to show most recent orders first
-            doc.recent = doc.recent.reverse();
-            res.json(doc);
-        })
-        .catch(next);
+    // Reverse the recent array to show most recent orders first
+    doc.recent = doc.recent.reverse();
+
+    // Group recent dishes by the added date
+    const groupedRecent = {};
+    let prevDate;
+    doc.recent.forEach(dish => {
+        const date = dish.added.getTime();
+
+        // If the current date is beyond 500ms from the last one, create a new date group.
+        // If the current date is within 500ms from the last one, added it to that last dish's date group.
+        if (Math.abs(date - prevDate) > 500 || !prevDate) {
+            if (!groupedRecent[date]) groupedRecent[date] = [];
+            prevDate = date;
+        }
+
+        groupedRecent[prevDate].push(dish);
+    });
+    doc.recent = groupedRecent;
+
+    res.json(doc);
 };
 
 const updateUserCart = async (req, res, next) => {
@@ -98,8 +118,7 @@ const updateUserCart = async (req, res, next) => {
         dishId = req.body.id,
         quantity = req.body.quantity;
 
-    if (!dishId || !quantity)
-        return next({ status: 400, message: 'Incomplete request body' });
+    if (!dishId || !quantity) return next({ status: 400, message: 'Incomplete request body' });
 
     if (!isValidObjectId(dishId)) return next({ status: 400, message: 'Invalid dishId' });
 
@@ -137,9 +156,7 @@ const emptyUserCart = async (req, res, next) => {
     // get cart array of user
     Users.findOne({ _id: userId }, { cart: 1 })
         // push cart array into recent array
-        .then(doc =>
-            Users.updateOne({ _id: userId }, { $push: { recent: { $each: doc.cart } } })
-        )
+        .then(doc => Users.updateOne({ _id: userId }, { $push: { recent: { $each: doc.cart } } }))
         // empty the cart array
         .then(() => Users.updateOne({ _id: userId }, { $set: { cart: [] } }))
         .then(() => res.status(204).send())
