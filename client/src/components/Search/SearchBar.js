@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import styles from './SearchBar.module.css';
 import classnames from 'classnames/bind';
 
@@ -5,12 +6,18 @@ import { BiSearch } from 'react-icons/bi';
 
 const cx = classnames.bind(styles);
 
-const SearchBar = () => {
+const SearchBar = ({ onSearch, onSearchFocus, autoFocus }) => {
     return (
-        <div className={cx('search')}>
-            <input type='text' name='search' placeholder='Find something to eat ...' />
+        <form className={cx('search')} onSubmit={onSearch} onFocus={onSearchFocus}>
+            <input
+                autoFocus={autoFocus}
+                required
+                type='text'
+                name='search'
+                placeholder='Find something to eat ...'
+            />
             <BiSearch />
-        </div>
+        </form>
     );
 };
 

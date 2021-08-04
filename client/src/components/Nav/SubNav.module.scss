@@ -24,8 +24,12 @@
         height: 1em;
         color: common.$primary;
 
-        &.--cuisine {
+        &.--bidish {
             height: 1.2em;
+        }
+
+        &.--aishop {
+            height: 1.05em;
         }
     }
 }

@@ -4,6 +4,7 @@ import './App.css';
 
 import MainNav from './components/Nav/MainNav.js';
 import Home from './components/Home/Home.js';
+import SearchPage from './components/Search/SearchPage.js';
 import Cart from './components/Cart/Cart.js';
 
 const ConditionalRoute = ({ children, condition, redirect, ...rest }) => (
@@ -27,7 +28,7 @@ const App = () => {
                     <Home />
                 </ConditionalRoute>
                 <ConditionalRoute path='/search' condition={isAuth} redirect='/login'>
-                    Search
+                    <SearchPage />
                 </ConditionalRoute>
                 <ConditionalRoute path='/profile' condition={isAuth} redirect='/login'>
                     Profile

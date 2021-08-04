@@ -60,7 +60,7 @@ const Cart = () => {
             <h1>My Cart</h1>
             <div className={cx('dishes')} onScroll={handleDishesScroll}>
                 {cart.dishes.map(dish => (
-                    <Dish dish={dish} key={dish._id} />
+                    <Dish standalone dish={dish} key={dish._id} />
                 ))}
             </div>
             <div className={cx('prices')}>

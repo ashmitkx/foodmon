@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Switch, Route, Redirect } from 'react-router-dom';
+import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 
 import SearchBar from '../Search/SearchBar.js';
 import SubNav from '../Nav/SubNav.js';
@@ -96,7 +96,7 @@ const Recents = () => {
         return (
             <CardsDisplay title={`${dayName}, ${dayDate}`} subtitle={time} key={date}>
                 {dishes.map(dish => (
-                    <Dish key={dish._id} dish={dish} />
+                    <Dish standalone recent key={dish._id} dish={dish} />
                 ))}
             </CardsDisplay>
         );
@@ -104,10 +104,13 @@ const Recents = () => {
 };
 
 const Home = () => {
+    const history = useHistory();
+    const onSearchFocus = () => history.push('/search');
+
     return (
         <main>
-            <SearchBar />
-            <SubNav />
+            <SearchBar onSearchFocus={onSearchFocus} />
+            <SubNav page='home' />
             <Switch>
                 <Route exact path='/home'>
                     <Redirect to='/home/toprated' />
