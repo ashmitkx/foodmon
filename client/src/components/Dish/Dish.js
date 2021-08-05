@@ -6,13 +6,13 @@ import Card from '../Layouts/Card';
 
 const cx = classnames.bind(styles);
 
-const QuantitySelect = ({ type, children }) => {
+const QuantitySelect = ({ type, children: quantity }) => {
     switch (type) {
         case 'recent':
             return (
                 <div className={cx('quantity')}>
                     <span>🞩</span>
-                    <span>{children}</span>
+                    <span>{quantity}</span>
                 </div>
             );
         case 'edit':
@@ -21,7 +21,7 @@ const QuantitySelect = ({ type, children }) => {
                     <button>
                         <FiPlus />
                     </button>
-                    <span>{children}</span>
+                    <span>{quantity}</span>
                     <button>
                         <FiMinus />
                     </button>
@@ -35,7 +35,7 @@ const QuantitySelect = ({ type, children }) => {
                 </button>
             );
         default:
-            throw new Error('Inavalid type prop in QuantitySelect');
+            throw new Error('Invalid type prop in QuantitySelect');
     }
 };
 

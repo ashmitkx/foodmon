@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
 import MainNav from './components/Nav/MainNav.js';
 import Home from './components/Home/Home.js';
 import SearchPage from './components/Search/SearchPage.js';
+import ProfilePage from './components/ProfilePage/ProfilePage.js';
 import Cart from './components/Cart/Cart.js';
 
 const ConditionalRoute = ({ children, condition, redirect, ...rest }) => (
@@ -12,7 +13,8 @@ const ConditionalRoute = ({ children, condition, redirect, ...rest }) => (
 );
 
 const App = () => {
-    const [isAuth, setIsAuth] = useState(true);
+    const [isAuth, setIsAuth] = useState(false);
+    useEffect(() => setIsAuth(true), []);
 
     return (
         <Router>
@@ -31,7 +33,7 @@ const App = () => {
                     <SearchPage />
                 </ConditionalRoute>
                 <ConditionalRoute path='/profile' condition={isAuth} redirect='/login'>
-                    Profile
+                    <ProfilePage />
                 </ConditionalRoute>
                 {/* Catch all unknown routes and redirect to / */}
                 <Route path='/*'>

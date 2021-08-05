@@ -1,17 +1,37 @@
 .cards-display {
   display: flex;
   flex-flow: column;
-  gap: 0.4em;
-  margin-bottom: 0.75em;
+  gap: 0.8em;
+  margin-bottom: 1em;
+}
+.cards-display.--overflowing {
+  margin: 0 -1.25em;
+  padding: 1em 1.25em;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(249, 99, 0, 0.5) transparent;
 }
 
 .titlebar {
+  align-self: flex-start;
   display: flex;
   flex-flow: column;
-  gap: 0.15em;
-  padding-left: 0.2em;
+  gap: 0.1em;
+  border: 2px solid rgba(249, 99, 0, 0.08);
+  background: rgba(249, 99, 0, 0.08);
+  padding: 0.35em 0.8em;
+  border-radius: 8px;
 }
-.titlebar span {
+.titlebar .title {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+}
+.titlebar svg {
+  height: 1.25em;
+  color: #e65d03;
+}
+.titlebar .subtitle {
   font-weight: 500;
   font-size: 0.95rem;
   color: rgba(34, 34, 34, 0.45);

@@ -2,8 +2,8 @@
 
 .cart {
     min-width: 27em;
-    width: 27.5%;
-    padding: 1.25em;
+    width: 30%;
+    padding: 0 1.25em 1.25em 1.25em;
 
     height: 100vh;
     position: sticky;
@@ -15,22 +15,6 @@
     gap: 1.25em;
 }
 
-.dishes {
-    flex-grow: 1;
-    margin: 0 -1.25em;
-    padding: 0 1.25em 1em 1.25em;
-
-    @include common.themed-scrollbar;
-
-    display: flex;
-    flex-flow: column;
-    gap: 1.25em;
-
-    .dish {
-        color: red;
-    }
-}
-
 .prices {
     display: flex;
     flex-flow: column;
@@ -39,25 +23,6 @@
     hr {
         background-color: common.$text-faded;
         height: 2px;
-    }
-
-    position: relative;
-}
-
-.scroll {
-    position: absolute;
-    top: -2.5em;
-    left: 45%;
-
-    background-color: common.$background;
-    box-shadow: common.$card-shadow;
-    border-radius: 50px;
-    padding: 0.5em;
-    z-index: 999;
-
-    svg {
-        color: common.$primary;
-        height: 1.5em;
     }
 }
 
@@ -80,8 +45,7 @@
 }
 
 .checkout {
-    width: 100%;
-    padding: 0.75em;
+    padding: 0.75em 1.25em;
     border-radius: 10px;
     background-color: common.$primary;
 

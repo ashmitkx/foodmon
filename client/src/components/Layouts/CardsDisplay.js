@@ -3,13 +3,16 @@ import classnames from 'classnames/bind';
 
 const cx = classnames.bind(styles);
 
-const CardsDisplay = ({ title, subtitle, children }) => {
+const CardsDisplay = ({ icon, title, subtitle, overflowing, children }) => {
     return (
-        <section className={cx('cards-display')}>
+        <section className={cx('cards-display', { '--overflowing': overflowing })}>
             {(title || subtitle) && (
                 <div className={cx('titlebar')}>
-                    <h1>{title}</h1>
-                    <span>{subtitle}</span>
+                    <div className={cx('title')}>
+                        {icon && <span>{icon}</span>}
+                        <h1>{title}</h1>
+                    </div>
+                    <span className={cx('subtitle')}>{subtitle}</span>
                 </div>
             )}
             <div className={cx('cards')}>{children}</div>

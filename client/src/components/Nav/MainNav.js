@@ -2,7 +2,7 @@ import styles from './MainNav.module.css';
 import classnames from 'classnames/bind';
 
 import { HiOutlineMenuAlt2 } from 'react-icons/hi';
-import { BiHomeAlt, BiSearch } from 'react-icons/bi';
+import { BiHomeAlt, BiSearch, BiFace } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
 
 const cx = classnames.bind(styles);
@@ -27,10 +27,7 @@ const MainNav = () => {
                     </li>
                     <li>
                         <NavLink to='/profile' activeClassName={cx('--active')}>
-                            <img
-                                src='https://lh3.googleusercontent.com/ogw/ADea4I5xRiiAz0gaPmMo9n-tNrRHYYUeI-BdSD3cRVOLXnA=s83-c-mo'
-                                alt='me'
-                            />
+                            <BiFace />
                         </NavLink>
                     </li>
                 </ul>

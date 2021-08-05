@@ -1,0 +1,20 @@
+@use '../../common';
+
+.text {
+    span {
+        color: common.$text-faded;
+        font-weight: 500;
+        font-size: 0.9rem;
+    }
+}
+
+.button {
+    padding: 0.35em 1.25em;
+    border-radius: 6px;
+    background-color: common.$primary;
+
+    color: common.$text-white;
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.1rem;
+}
