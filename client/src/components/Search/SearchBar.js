@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import styles from './SearchBar.module.css';
 import classnames from 'classnames/bind';
 

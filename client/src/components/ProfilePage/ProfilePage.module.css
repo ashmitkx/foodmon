@@ -1,0 +1,15 @@
+.text span {
+  color: rgba(34, 34, 34, 0.45);
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.button {
+  padding: 0.35em 1.25em;
+  border-radius: 6px;
+  background-color: #e65d03;
+  color: #f2f2f2;
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.1rem;
+}

@@ -4,16 +4,18 @@ import { Switch, Route, Redirect, useHistory } from 'react-router-dom';
 import SearchBar from '../Search/SearchBar.js';
 import SubNav from '../Nav/SubNav.js';
 import RestaurantCard from '../Restaurant/RestaurantCard.js';
-import Dish from '../Dish/Dish.js';
 import CardsDisplay from '../Layouts/CardsDisplay.js';
+import Recents from './Recents.js';
 import restaurantsApi from '../../api/restaurants';
-import usersApi from '../../api/users.js';
+
+import { BiStar, BiTimeFive, BiDish } from 'react-icons/bi';
+import { RiMapPin2Line } from 'react-icons/ri';
 
 const SortedRestaurants = ({ sortby }) => {
     const [restaurants, setRestaurants] = useState([]);
 
     useEffect(() => {
-        const getSortedRestaurants = async () => {
+        const getSortedRestaurants = async sortby => {
             try {
                 const res = await restaurantsApi.getRestaurants({ sortby });
                 setRestaurants(res.data);
@@ -21,7 +23,7 @@ const SortedRestaurants = ({ sortby }) => {
                 console.error(err);
             }
         };
-        getSortedRestaurants();
+        getSortedRestaurants(sortby);
     }, [sortby]);
 
     return (
@@ -44,7 +46,7 @@ const GroupedRestaurants = ({ groupby }) => {
     const [restaurantGroups, setRestaurantGroups] = useState({});
 
     useEffect(() => {
-        const getGroupedRestaurants = async () => {
+        const getGroupedRestaurants = async groupby => {
             try {
                 const res = await restaurantsApi.getRestaurants({ groupby, sortby: 'rating' });
                 setRestaurantGroups(res.data);
@@ -52,11 +54,11 @@ const GroupedRestaurants = ({ groupby }) => {
                 console.error(err);
             }
         };
-        getGroupedRestaurants();
+        getGroupedRestaurants(groupby);
     }, [groupby]);
 
     return Object.entries(restaurantGroups).map(([cuisine, restaurants]) => (
-        <CardsDisplay title={`${cuisineEmojis[cuisine.toUpperCase()]} ${cuisine}`} key={cuisine}>
+        <CardsDisplay icon={cuisineEmojis[cuisine.toUpperCase()]} title={cuisine} key={cuisine}>
             {restaurants.map(restaurant => (
                 <RestaurantCard key={restaurant._id} restaurant={restaurant} />
             ))}
@@ -64,44 +66,12 @@ const GroupedRestaurants = ({ groupby }) => {
     ));
 };
 
-const Recents = () => {
-    const [dateGroups, setDateGroups] = useState({});
-
-    useEffect(() => {
-        const getRecentDishes = async () => {
-            try {
-                const res = await usersApi.getRecent('61045a5df4ecda2f10e889c7');
-                setDateGroups(res.data.recent);
-            } catch (err) {
-                console.error(err);
-            }
-        };
-        getRecentDishes();
-    }, []);
-
-    return Object.entries(dateGroups).map(([date, dishes]) => {
-        const options = {
-            weekday: 'short',
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-            hour: 'numeric',
-            minute: 'numeric',
-            hour12: true
-        };
-        const [dayName, dayDate, time] = new Date(Number(date))
-            .toLocaleString('en-GB', options)
-            .split(', ');
-
-        return (
-            <CardsDisplay title={`${dayName}, ${dayDate}`} subtitle={time} key={date}>
-                {dishes.map(dish => (
-                    <Dish standalone recent key={dish._id} dish={dish} />
-                ))}
-            </CardsDisplay>
-        );
-    });
-};
+const subNavLinks = [
+    { subPage: '/toprated', icon: <BiStar />, text: 'Top Rated' },
+    { subPage: '/nearby', icon: <RiMapPin2Line />, text: 'Nearby' },
+    { subPage: '/cuisines', icon: <BiDish style={{ height: '1.2em' }} />, text: 'Cuisines' },
+    { subPage: '/recent', icon: <BiTimeFive />, text: 'Recent' }
+];
 
 const Home = () => {
     const history = useHistory();
@@ -110,7 +80,7 @@ const Home = () => {
     return (
         <main>
             <SearchBar onSearchFocus={onSearchFocus} />
-            <SubNav page='home' />
+            <SubNav basePage='/home' links={subNavLinks} />
             <Switch>
                 <Route exact path='/home'>
                     <Redirect to='/home/toprated' />

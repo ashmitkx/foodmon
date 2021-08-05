@@ -11,13 +11,16 @@ import CardsDisplay from '../Layouts/CardsDisplay.js';
 import RestaurantCard from '../Restaurant/RestaurantCard.js';
 import Dish from '../Dish/Dish.js';
 
+import { BiDish } from 'react-icons/bi';
+import { AiOutlineShop } from 'react-icons/ai';
+
 const cx = classnames.bind(styles);
 
 const RestaurantResults = ({ keyword }) => {
     const [restaurants, setRestaurants] = useState([]);
 
     useEffect(() => {
-        const searchRestaurants = async () => {
+        const searchRestaurants = async keyword => {
             try {
                 const res = await restaurantsApi.getRestaurants({ keyword, sortby: 'rating' });
                 setRestaurants(res.data);
@@ -25,7 +28,7 @@ const RestaurantResults = ({ keyword }) => {
                 console.log(err);
             }
         };
-        searchRestaurants();
+        searchRestaurants(keyword);
     }, [keyword]);
 
     if (restaurants.length === 0)
@@ -44,7 +47,7 @@ const DishResults = ({ keyword }) => {
     const [dishes, setDishes] = useState([]);
 
     useEffect(() => {
-        const searchDishes = async () => {
+        const searchDishes = async keyword => {
             try {
                 const res = await dishesApi.getDishes({ keyword });
                 setDishes(res.data);
@@ -52,7 +55,7 @@ const DishResults = ({ keyword }) => {
                 console.log(err);
             }
         };
-        searchDishes();
+        searchDishes(keyword);
     }, [keyword]);
 
     if (dishes.length === 0)
@@ -71,6 +74,19 @@ const PreResult = () => (
     <h1 className={cx('message')}>Search for restaurants, dishes and cuisines ...</h1>
 );
 
+const subNavLinks = [
+    {
+        subPage: '/restaurants',
+        icon: <AiOutlineShop style={{ height: '1.05em' }} />,
+        text: 'Restaurants'
+    },
+    {
+        subPage: '/dishes',
+        icon: <BiDish style={{ height: '1.2em' }} />,
+        text: 'Dishes'
+    }
+];
+
 const SearchPage = () => {
     const [keyword, setKeyword] = useState();
 
@@ -82,7 +98,7 @@ const SearchPage = () => {
     return (
         <main>
             <SearchBar onSearch={onSearch} autoFocus />
-            <SubNav page='search' />
+            <SubNav basePage='/search' links={subNavLinks} />
             <Switch>
                 <Route exact path='/search'>
                     <Redirect to='/search/restaurants' />
