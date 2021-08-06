@@ -50,22 +50,21 @@ const getRestaurants = async (req, res, next) => {
 };
 
 /* 
-    Retuns a list of restaurants corresponding to a list of ObjectIds.
+    Retuns a restaurants corresponding to an ObjectId.
 */
-const getRestaurantsByIds = async (req, res, next) => {
-    const ids = req.params.ids.split(',');
+const getRestaurantById = async (req, res, next) => {
+    const id = req.params.id;
 
-    // return 400 if not all ids are invalid ObjectIds
-    if (!ids.every(id => isValidObjectId(id)))
-        return next({ status: 400, message: 'Invalid restaurantId(s)' });
+    // return 400 if id is an invalid ObjectId
+    if (!isValidObjectId(id)) return next({ status: 400, message: 'Invalid restaurantId' });
 
-    Restaurants.find({ _id: { $in: ids } })
+    Restaurants.findOne({ _id: id })
         .then(doc => {
-            if (doc.length === 0) return next({ status: 404 });
+            if (!doc) return next({ status: 404 });
             res.json(doc);
         })
         .catch(next);
 };
 
-const restaurantsApi = { getRestaurants, getRestaurantsByIds };
+const restaurantsApi = { getRestaurants, getRestaurantById };
 export default restaurantsApi;
