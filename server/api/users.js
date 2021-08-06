@@ -192,6 +192,7 @@ const emptyUserCart = async (req, res, next) => {
 
     // get cart array of user
     Users.findOne({ _id: userId }, { cart: 1 })
+        .lean()
         // push cart array into recent array
         .then(doc => Users.updateOne({ _id: userId }, { $push: { recent: { $each: doc.cart } } }))
         // empty the cart array

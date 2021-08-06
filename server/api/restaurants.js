@@ -24,7 +24,7 @@ const getRestaurants = async (req, res, next) => {
 
     let doc;
     try {
-        doc = await Restaurants.find(query).sort(sortby);
+        doc = await Restaurants.find(query).sort(sortby).lean();
     } catch (e) {
         return next(e);
     }

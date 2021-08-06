@@ -27,7 +27,7 @@ const getDishes = async (req, res, next) => {
 
     let doc;
     try {
-        doc = await Dishes.find(query);
+        doc = await Dishes.find(query).lean();
     } catch (err) {
         return next(err);
     }
