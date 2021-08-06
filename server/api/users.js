@@ -1,5 +1,6 @@
 import mongoose from 'mongoose';
 import Users from '../models/user.js';
+import Dishes from '../models/dish.js';
 
 const isValidObjectId = mongoose.isValidObjectId;
 const ObjectId = mongoose.Types.ObjectId;
@@ -113,41 +114,77 @@ const getUserRecent = async (req, res, next) => {
     res.json(doc);
 };
 
+const addToUserCart = async (req, res, next) => {
+    const userId = req.params.id,
+        dishId = req.body.id;
+
+    if (!dishId) return next({ status: 400, message: 'Incomplete request body' });
+    if (!isValidObjectId(dishId)) return next({ status: 400, message: 'Invalid dishId' });
+
+    let result;
+    try {
+        // Add the dishID into the cart, only if it doesnt already exist.
+        // The quantity need not be specified, as it defaults to 1.
+        result = await Users.updateOne(
+            { _id: userId, 'cart._id': { $ne: dishId } },
+            { $push: { cart: { _id: dishId } } }
+        );
+    } catch (err) {
+        return next(err);
+    }
+
+    // Check if the adding the dishID was unsuccessful
+    if (result.nModified === 0)
+        return next({
+            status: 400,
+            message: 'Failed to add dish to cart. Dish may already exist.'
+        });
+
+    let dish;
+    try {
+        // get the dish document corresponding to the newly added dishID
+        dish = await Dishes.findById(dishId).lean();
+    } catch (err) {
+        return next(err);
+    }
+
+    // Attach the initial default quantity to the response
+    dish = { ...dish, quantity: 1 };
+    res.json(dish);
+};
+
 const updateUserCart = async (req, res, next) => {
     const userId = req.params.id,
         dishId = req.body.id,
         quantity = req.body.quantity;
 
-    if (!dishId || !quantity) return next({ status: 400, message: 'Incomplete request body' });
-
+    if (!dishId || quantity == undefined)
+        return next({ status: 400, message: 'Incomplete request body' });
     if (!isValidObjectId(dishId)) return next({ status: 400, message: 'Invalid dishId' });
 
-    if (quantity <= 0) {
+    let result;
+    try {
         // If specified quantity is <= 0, then remove the item from cart array
-        await Users.updateOne({ _id: userId }, { $pull: { cart: { _id: dishId } } })
-            .then(() => res.status(204).send())
-            .catch(next);
-        return;
-    }
-
-    // Add the dish obj into the cart, only if it doesnt exist
-    Users.updateOne(
-        { _id: userId, 'cart._id': { $ne: dishId } },
-        { $push: { cart: { _id: dishId, quantity } } }
-    )
-        .then(result => {
-            // Check if the adding the dish object was successful
-            if (result.nModified !== 0) return;
-
-            // If adding the dish object was unsuccessful, that means that the object already exists.
-            // Hence, update the object
-            return Users.updateOne(
+        if (quantity <= 0)
+            result = await Users.updateOne({ _id: userId }, { $pull: { cart: { _id: dishId } } });
+        // Else update the quantity corresponding to the dishId
+        else
+            result = await Users.updateOne(
                 { _id: userId, 'cart._id': dishId },
                 { $set: { 'cart.$.quantity': quantity } }
             );
-        })
-        .then(() => res.status(204).send())
-        .catch(next);
+    } catch (err) {
+        return next(err);
+    }
+
+    // Check if updating the dish was unsuccessful
+    if (result.nModified === 0)
+        return next({
+            status: 400,
+            message: 'Failed to update dish in cart. Dish may not exist.'
+        });
+
+    res.status(204).send();
 };
 
 const emptyUserCart = async (req, res, next) => {
@@ -167,6 +204,7 @@ const usersApi = {
     validateUserId,
     getUserCart,
     getUserRecent,
+    addToUserCart,
     updateUserCart,
     emptyUserCart
 };

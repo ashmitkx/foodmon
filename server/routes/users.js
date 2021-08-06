@@ -13,6 +13,7 @@ specificUserRoute.route('/').get((req, res) => res.send(`/${req.params.id} : get
 specificUserRoute
     .route('/cart')
     .get(usersApi.getUserCart) // get card data
+    .post(usersApi.addToUserCart) // add new dish to cart
     .put(usersApi.updateUserCart) // update cart data
     .delete(usersApi.emptyUserCart); // empty cart (and save contents into recent)
 specificUserRoute.route('/recent').get(usersApi.getUserRecent); // get recent orders data
