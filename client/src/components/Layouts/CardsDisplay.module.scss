@@ -3,9 +3,11 @@
 .cards-display {
     display: flex;
     flex-flow: column;
-    gap: 0.8em;
+    gap: 1em;
 
-    margin-bottom: 1em;
+    &:not(:last-child) {
+        margin-bottom: 0.75em;
+    }
 
     &.--overflowing {
         margin: 0 -1.25em;

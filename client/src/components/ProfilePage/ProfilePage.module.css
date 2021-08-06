@@ -1,15 +1,38 @@
-.text span {
-  color: rgba(34, 34, 34, 0.45);
-  font-weight: 500;
-  font-size: 0.9rem;
+.profile {
+  align-self: center;
+  width: 28em;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 1.25em;
 }
-
-.button {
+.profile img {
+  height: 10em;
+  width: 10em;
+  border-radius: 20px;
+}
+.profile button {
+  width: 75%;
   padding: 0.35em 1.25em;
   border-radius: 6px;
-  background-color: #e65d03;
+  border: 2px solid rgba(249, 99, 0, 0.08);
+  background: #e65d03;
   color: #f2f2f2;
   text-align: center;
   font-weight: 500;
-  font-size: 1.1rem;
+  font-size: 1.25rem;
+}
+
+.text {
+  display: flex;
+  flex-flow: column;
+  gap: 0.1em;
+  text-align: center;
+}
+.text .name {
+  font-size: 2rem;
+}
+.text .email {
+  color: rgba(34, 34, 34, 0.45);
+  font-weight: 500;
 }

@@ -1,0 +1,57 @@
+.restaurant {
+  align-self: center;
+  width: 28em;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 1.25em;
+}
+.restaurant img {
+  height: 10em;
+  width: 10em;
+  border-radius: 20px;
+}
+
+.text {
+  display: flex;
+  flex-flow: column;
+  gap: 0.1em;
+  text-align: center;
+}
+.text h2 {
+  font-size: 2rem;
+}
+.text span {
+  color: rgba(34, 34, 34, 0.45);
+  font-weight: 500;
+}
+
+.details {
+  display: flex;
+  justify-content: space-around;
+  width: 100%;
+  padding: 0.5em 0;
+  border-block: 3px solid rgba(249, 99, 0, 0.5);
+}
+
+.info {
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+}
+.info svg {
+  color: #e65d03;
+  width: 1.125em;
+}
+
+.back {
+  position: fixed;
+  top: 0.85em;
+  padding: 0.3em 0.35em;
+  border-radius: 50px;
+  box-shadow: 0px 8px 20px 1px rgba(170, 170, 170, 0.3);
+}
+.back svg {
+  color: #e65d03;
+  height: 2em;
+}

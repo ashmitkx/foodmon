@@ -1,6 +1,7 @@
 .cart {
   min-width: 27em;
   width: 30%;
+  max-width: 28em;
   padding: 0 1.25em 1.25em 1.25em;
   height: 100vh;
   position: sticky;
@@ -17,7 +18,7 @@
   gap: 0.6em;
 }
 .prices hr {
-  background-color: rgba(34, 34, 34, 0.45);
+  background-color: rgba(249, 99, 0, 0.5);
   height: 2px;
 }
 
@@ -38,7 +39,7 @@
 }
 
 .checkout {
-  padding: 0.75em 1.25em;
+  padding: 0.7em 1.25em;
   border-radius: 10px;
   background-color: #e65d03;
   color: #f2f2f2;

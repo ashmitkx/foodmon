@@ -1,0 +1,66 @@
+@use '../../common';
+
+.restaurant {
+    align-self: center;
+    width: 28em;
+
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    gap: 1.25em;
+
+    img {
+        height: 10em;
+        width: 10em;
+        border-radius: 20px;
+    }
+}
+
+.text {
+    display: flex;
+    flex-flow: column;
+    gap: 0.1em;
+    text-align: center;
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    span {
+        color: common.$text-faded;
+        font-weight: 500;
+    }
+}
+
+.details {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+
+    padding: 0.5em 0;
+    border-block: 3px solid common.$primary-kinda-faded;
+}
+
+.info {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+
+    svg {
+        color: common.$primary;
+        width: 1.125em;
+    }
+}
+
+.back {
+    position: fixed;
+    top: 0.85em;
+    padding: 0.3em 0.35em;
+    border-radius: 50px;
+    box-shadow: common.$card-shadow;
+
+    svg {
+        color: common.$primary;
+        height: 2em;
+    }
+}

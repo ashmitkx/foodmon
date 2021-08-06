@@ -1,8 +1,10 @@
 .cards-display {
   display: flex;
   flex-flow: column;
-  gap: 0.8em;
-  margin-bottom: 1em;
+  gap: 1em;
+}
+.cards-display:not(:last-child) {
+  margin-bottom: 0.75em;
 }
 .cards-display.--overflowing {
   margin: 0 -1.25em;

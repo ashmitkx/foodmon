@@ -3,6 +3,7 @@
 .cart {
     min-width: 27em;
     width: 30%;
+    max-width: 28em;
     padding: 0 1.25em 1.25em 1.25em;
 
     height: 100vh;
@@ -21,7 +22,7 @@
     gap: 0.6em;
 
     hr {
-        background-color: common.$text-faded;
+        background-color: common.$primary-kinda-faded;
         height: 2px;
     }
 }
@@ -45,7 +46,7 @@
 }
 
 .checkout {
-    padding: 0.75em 1.25em;
+    padding: 0.7em 1.25em;
     border-radius: 10px;
     background-color: common.$primary;
 
