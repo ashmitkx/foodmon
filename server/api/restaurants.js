@@ -31,7 +31,7 @@ const getRestaurants = async (req, res, next) => {
 
     switch (groupby) {
         // Group restaurants by the first cuisine of each restaurant's cuisines array, if specified.
-        case 'cuisine':
+        case 'cuisine': {
             const groupedDoc = {};
             doc.forEach(restaurant => {
                 const cuisine = restaurant.cuisines[0];
@@ -41,6 +41,7 @@ const getRestaurants = async (req, res, next) => {
 
             doc = groupedDoc;
             break;
+        }
 
         default:
         // Do nothing
@@ -58,7 +59,8 @@ const getRestaurantById = async (req, res, next) => {
     // return 400 if id is an invalid ObjectId
     if (!isValidObjectId(id)) return next({ status: 400, message: 'Invalid restaurantId' });
 
-    Restaurants.findOne({ _id: id })
+    Restaurants.findById(id)
+        .lean()
         .then(doc => {
             if (!doc) return next({ status: 404 });
             res.json(doc);

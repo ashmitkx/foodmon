@@ -15,8 +15,7 @@ const getDishes = async (req, res, next) => {
     else if (req.query.restaurantId) {
         const restaurantId = req.query.restaurantId;
         // return 400 if restaurantId is an invalid ObjectId
-        if (!isValidObjectId(restaurantId))
-            return next({ status: 400, message: 'Invalid restaurantId' });
+        if (!isValidObjectId(restaurantId)) return next({ status: 400, message: 'Invalid restaurantId' });
 
         query = { 'restaurant._id': { $eq: restaurantId } };
         groupby = 'section'; // Also group dishes by restaurant section
@@ -34,7 +33,7 @@ const getDishes = async (req, res, next) => {
 
     switch (groupby) {
         // Group dishes by the restaurant section, if specified.
-        case 'section':
+        case 'section': {
             const groupedDoc = {};
             doc.forEach(dish => {
                 const section = dish.restaurant.section;
@@ -44,7 +43,7 @@ const getDishes = async (req, res, next) => {
 
             doc = groupedDoc;
             break;
-
+        }
         default:
         // Do nothing
     }
@@ -59,8 +58,7 @@ const getDishesByIds = async (req, res, next) => {
     const ids = req.params.ids.split(',');
 
     // return 400 if not all ids are invalid ObjectIds
-    if (!ids.every(id => isValidObjectId(id)))
-        return next({ status: 400, message: 'Invalid dishId(s)' });
+    if (!ids.every(id => isValidObjectId(id))) return next({ status: 400, message: 'Invalid dishId(s)' });
 
     Dishes.find({ _id: { $in: ids } })
         .then(doc => {

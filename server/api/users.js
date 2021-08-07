@@ -133,13 +133,6 @@ const addToUserCart = async (req, res, next) => {
         return next(err);
     }
 
-    // Check if the adding the dishID was unsuccessful
-    if (result.nModified === 0)
-        return next({
-            status: 400,
-            message: 'Failed to add dish to cart. Dish may already exist.'
-        });
-
     let dish;
     try {
         // get the dish document corresponding to the newly added dishID
@@ -158,7 +151,7 @@ const updateUserCart = async (req, res, next) => {
         dishId = req.body.id,
         quantity = req.body.quantity;
 
-    if (!dishId || quantity == undefined)
+    if (!dishId || !(quantity || quantity === 0))
         return next({ status: 400, message: 'Incomplete request body' });
     if (!isValidObjectId(dishId)) return next({ status: 400, message: 'Invalid dishId' });
 
@@ -178,10 +171,10 @@ const updateUserCart = async (req, res, next) => {
     }
 
     // Check if updating the dish was unsuccessful
-    if (result.nModified === 0)
+    if (result.n === 0)
         return next({
             status: 400,
-            message: 'Failed to update dish in cart. Dish may not exist.'
+            message: 'Failed to update dish. Dish does not exist in cart.'
         });
 
     res.status(204).send();
