@@ -1,9 +1,11 @@
+import { Link } from 'react-router-dom';
 import styles from './Dish.module.css';
 import classnames from 'classnames/bind';
 
 import { dataAPI } from '../../api.js';
 import { useCartContext } from '../../contexts/CartContext';
 import { FiPlus, FiMinus } from 'react-icons/fi';
+import { BiTrashAlt } from 'react-icons/bi';
 import Card from '../Layouts/Card';
 
 const cx = classnames.bind(styles);
@@ -12,7 +14,7 @@ const QuantitySelect = ({ type, onUpdate, onAdd, children: quantity }) => {
     switch (type) {
         case 'recent':
             return (
-                <div className={cx('quantity')}>
+                <div className={cx('quantity', '--recent')}>
                     <span>🞩</span>
                     <span>{quantity}</span>
                 </div>
@@ -25,7 +27,11 @@ const QuantitySelect = ({ type, onUpdate, onAdd, children: quantity }) => {
                     </button>
                     <span>{quantity}</span>
                     <button onClick={() => onUpdate(-1)}>
-                        <FiMinus />
+                        {quantity > 1 ? (
+                            <FiMinus />
+                        ) : (
+                            <BiTrashAlt style={{ height: '1.1em', marginBottom: '1px' }} />
+                        )}
                     </button>
                 </div>
             );
@@ -40,6 +46,9 @@ const QuantitySelect = ({ type, onUpdate, onAdd, children: quantity }) => {
             throw new Error('Invalid type prop in QuantitySelect');
     }
 };
+
+const ConditionalLink = ({ to, condition, children }) =>
+    condition ? <Link to={to}>{children}</Link> : children;
 
 const Dish = ({ dish, recent, standalone }) => {
     const [cart, dispatchCart] = useCartContext();
@@ -79,8 +88,10 @@ const Dish = ({ dish, recent, standalone }) => {
     return (
         <Card img={{ src: dish.imgUrl, alt: 'dish img' }}>
             <div className={cx('top')}>
-                <h2 id={standalone ? undefined : dish._id}>{dish.name}</h2>
-                {standalone && <span className={cx('restaurant-name')}>{dish.restaurant.name}</span>}
+                <ConditionalLink to={`/restaurant/${dish.restaurant._id}`} condition={standalone}>
+                    <h2 id={standalone ? undefined : dish._id}>{dish.name}</h2>
+                    {standalone && <span className={cx('restaurant-name')}>{dish.restaurant.name}</span>}
+                </ConditionalLink>
                 <img
                     src={dish.vegetarian ? '/assets/veg-icon.png' : '/assets/non-veg-icon.png'}
                     alt='veg-option'

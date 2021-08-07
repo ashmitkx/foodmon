@@ -32,14 +32,18 @@
 .quantity {
   display: flex;
   align-items: center;
-  gap: 0.75em;
+  gap: 0.5em;
+  min-width: 6.5em;
   background: rgba(249, 99, 0, 0.08);
   border-radius: 5px;
   padding: 0.3125em 0.5em;
   color: #e65d03;
 }
+.quantity.--recent {
+  min-width: 5.5em;
+}
 .quantity span {
-  min-width: 1.25em;
+  flex-grow: 1;
   font-weight: 500;
   font-size: 1.2em;
   text-align: center;

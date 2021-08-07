@@ -38,7 +38,12 @@
 .quantity {
     display: flex;
     align-items: center;
-    gap: 0.75em;
+    gap: 0.5em;
+    min-width: 6.5em;
+
+    &.--recent {
+        min-width: 5.5em;
+    }
 
     background: common.$primary-faded;
     border-radius: 5px;
@@ -46,7 +51,7 @@
     color: common.$primary;
 
     span {
-        min-width: 1.25em;
+        flex-grow: 1;
         font-weight: 500;
         font-size: 1.2em;
         text-align: center;
