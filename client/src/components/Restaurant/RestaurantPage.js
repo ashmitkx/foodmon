@@ -3,8 +3,7 @@ import { useParams, useHistory } from 'react-router-dom';
 import styles from './RestaurantPage.module.css';
 import classnames from 'classnames/bind';
 
-import restaurantsApi from '../../api/restaurants.js';
-import dishesApi from '../../api/dishes.js';
+import { dataAPI } from '../../api.js';
 import CardsDisplay from '../Layouts/CardsDisplay.js';
 import Dish from '../Dish/Dish.js';
 import { BiStar, BiTimeFive } from 'react-icons/bi';
@@ -19,7 +18,7 @@ const Restaurant = ({ id }) => {
     useEffect(() => {
         const getRestaurant = async id => {
             try {
-                const res = await restaurantsApi.getRestaurant(id);
+                const res = await dataAPI.get(`/restaurants/${id}`);
                 setRestaurant(res.data);
             } catch (err) {
                 console.error(err);
@@ -65,7 +64,7 @@ const Dishes = ({ restaurantId }) => {
     useEffect(() => {
         const getGroupedDishes = async restaurantId => {
             try {
-                const res = await dishesApi.getDishes({ restaurantId });
+                const res = await dataAPI.get(`/dishes?restaurantId=${restaurantId}`);
                 setDishGroups(res.data);
             } catch (err) {
                 console.error(err);

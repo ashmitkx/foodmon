@@ -3,8 +3,7 @@ import { Switch, Route, Redirect } from 'react-router-dom';
 import styles from './SearchPage.module.css';
 import classnames from 'classnames/bind';
 
-import restaurantsApi from '../../api/restaurants.js';
-import dishesApi from '../../api/dishes.js';
+import { dataAPI } from '../../api.js';
 import SearchBar from './SearchBar.js';
 import SubNav from '../Nav/SubNav.js';
 import CardsDisplay from '../Layouts/CardsDisplay.js';
@@ -22,7 +21,7 @@ const RestaurantResults = ({ keyword }) => {
     useEffect(() => {
         const searchRestaurants = async keyword => {
             try {
-                const res = await restaurantsApi.getRestaurants({ keyword, sortby: 'rating' });
+                const res = await dataAPI.get(`/restaurants?sortby=rating&&keyword=${keyword}`);
                 setRestaurants(res.data);
             } catch (err) {
                 console.log(err);
@@ -49,7 +48,7 @@ const DishResults = ({ keyword }) => {
     useEffect(() => {
         const searchDishes = async keyword => {
             try {
-                const res = await dishesApi.getDishes({ keyword });
+                const res = await dataAPI.get(`/dishes?keyword=${keyword}`);
                 setDishes(res.data);
             } catch (err) {
                 console.log(err);

@@ -6,7 +6,7 @@ import SubNav from '../Nav/SubNav.js';
 import RestaurantCard from '../Restaurant/RestaurantCard.js';
 import CardsDisplay from '../Layouts/CardsDisplay.js';
 import Recents from './Recents.js';
-import restaurantsApi from '../../api/restaurants';
+import { dataAPI } from '../../api.js';
 
 import { BiStar, BiTimeFive, BiDish } from 'react-icons/bi';
 import { RiMapPin2Line } from 'react-icons/ri';
@@ -17,7 +17,7 @@ const SortedRestaurants = ({ sortby }) => {
     useEffect(() => {
         const getSortedRestaurants = async sortby => {
             try {
-                const res = await restaurantsApi.getRestaurants({ sortby });
+                const res = await dataAPI.get(`/restaurants?sortby=${sortby}`);
                 setRestaurants(res.data);
             } catch (err) {
                 console.error(err);
@@ -48,7 +48,7 @@ const GroupedRestaurants = ({ groupby }) => {
     useEffect(() => {
         const getGroupedRestaurants = async groupby => {
             try {
-                const res = await restaurantsApi.getRestaurants({ groupby, sortby: 'rating' });
+                const res = await dataAPI.get(`/restaurants?sortby=rating&&groupby=${groupby}`);
                 setRestaurantGroups(res.data);
             } catch (err) {
                 console.error(err);

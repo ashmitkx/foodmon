@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
-import usersApi from '../../api/users.js';
 
+import { dataAPI } from '../../api.js';
 import Dish from '../Dish/Dish.js';
 import CardsDisplay from '../Layouts/CardsDisplay.js';
 
@@ -10,7 +10,7 @@ const Recents = () => {
     useEffect(() => {
         const getRecentDishes = async () => {
             try {
-                const res = await usersApi.getRecent('61045a5df4ecda2f10e889c7');
+                const res = await dataAPI.get('/users/61045a5df4ecda2f10e889c7/recent');
                 setDateGroups(res.data.recent);
             } catch (err) {
                 console.error(err);
