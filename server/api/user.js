@@ -82,7 +82,7 @@ const getUserRecent = async (req, res, next) => {
  */
 const addToUserCart = async (req, res, next) => {
     const user = req.user,
-        dishId = req.body.id;
+        dishId = req.body._id;
 
     if (!dishId) return next({ status: 400, message: 'Incomplete request body' });
     if (!isValidObjectId(dishId)) return next({ status: 400, message: 'Invalid dishId' });
@@ -121,7 +121,7 @@ const addToUserCart = async (req, res, next) => {
  */
 const updateUserCart = async (req, res, next) => {
     const user = req.user,
-        dishId = req.body.id,
+        dishId = req.body._id,
         quantity = req.body.quantity;
 
     if (!dishId || !(quantity || quantity === 0))
