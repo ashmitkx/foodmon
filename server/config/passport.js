@@ -1,6 +1,6 @@
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import passport from 'passport';
-import User from '../models/user.js';
+import Users from '../models/user.js';
 
 passport.use(
     new GoogleStrategy(
@@ -13,12 +13,12 @@ passport.use(
             profile = profile._json;
 
             // find user in users collection
-            User.findOne({ googleId: profile.sub })
+            Users.findOne({ googleId: profile.sub })
                 .then(currentUser => {
                     if (currentUser) return currentUser;
 
                     // create new user if the users collection doesn't have the User
-                    return new User({
+                    return new Users({
                         name: profile.name,
                         googleId: profile.sub,
                         imgUrl: profile.picture,
@@ -34,15 +34,11 @@ passport.use(
 );
 
 //  serialize the user.id into a cookie to send to browser
-passport.serializeUser((user, done) => {
-    console.log('serializing...');
-    done(null, user.id);
-});
+passport.serializeUser((user, done) => done(null, user.id));
 
 // deserialize the cookie userId and look for a user in the database
-passport.deserializeUser((id, done) => {
-    console.log('de-serializing...');
-    User.findById(id)
+passport.deserializeUser((id, done) =>
+    Users.findById(id)
         .then(user => done(null, user))
-        .catch(done);
-});
+        .catch(done)
+);

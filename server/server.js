@@ -18,7 +18,7 @@ const app = express();
 app.use(express.json());
 app.use(
     cors({
-        origin: '*',
+        origin: process.env.CLIENT_BASE_URL,
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
         credentials: true // allow session cookie from browser to pass through
     })
@@ -37,28 +37,11 @@ app.use(passport.session());
 
 app.use('/auth', authRoutes);
 
-// const authCheck = (req, res, next) => {
-//     console.log('checking auth...');
-
-//     if (req.user) return next();
-
-//     res.status(401).json({
-//         authenticated: false,
-//         message: 'user has not been authenticated'
-//     });
-// };
-
-// // if it's already login, send the profile response,
-// // otherwise, send a 401 response that the user is not authenticated
-// // authCheck before navigating to home page
-// app.get('/', authCheck, (req, res) => {
-//     res.status(200).json({
-//         authenticated: true,
-//         message: 'user successfully authenticated',
-//         user: req.user,
-//         cookies: req.cookies
-//     });
-// });
+const authCheck = (req, res, next) => {
+    if (req.user) return next();
+    res.status(401).send();
+};
+app.all('/api/v1/*', authCheck);
 
 app.use('/api/v1/restaurants', restaurantsRoute);
 app.use('/api/v1/dishes', dishesRoute);
@@ -75,7 +58,7 @@ app.use((err, req, res, next) => {
 
 // Connect to mongo
 mongoose
-    .connect('mongodb://localhost:27017/foodmon', {
+    .connect(process.env.MONGO_DB_URI, {
         useNewUrlParser: true,
         useUnifiedTopology: true
     })
