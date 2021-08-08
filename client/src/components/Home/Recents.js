@@ -10,8 +10,8 @@ const Recents = () => {
     useEffect(() => {
         const getRecentDishes = async () => {
             try {
-                const res = await dataAPI.get('/users/61045a5df4ecda2f10e889c7/recent');
-                setDateGroups(res.data.recent);
+                const res = await dataAPI.get('/user/recent');
+                setDateGroups(res.data);
             } catch (err) {
                 console.error(err);
             }

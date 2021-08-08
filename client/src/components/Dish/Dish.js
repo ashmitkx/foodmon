@@ -68,7 +68,7 @@ const Dish = ({ dish, recent, standalone }) => {
         const newQuantity = quantity + change;
 
         try {
-            await dataAPI.put('/users/61045a5df4ecda2f10e889c7/cart', { id: dishId, quantity: newQuantity });
+            await dataAPI.put('/user/cart', { _id: dishId, quantity: newQuantity });
             dispatchCart({ type: 'update', payload: { dishId, quantity: newQuantity } });
         } catch (err) {
             console.log(err);
@@ -76,9 +76,9 @@ const Dish = ({ dish, recent, standalone }) => {
     };
 
     const onAdd = async () => {
-        const id = dish._id;
+        const _id = dish._id;
         try {
-            const res = await dataAPI.post('/users/61045a5df4ecda2f10e889c7/cart', { id });
+            const res = await dataAPI.post('/user/cart', { _id });
             dispatchCart({ type: 'add', payload: { dish: res.data } });
         } catch (err) {
             console.log(err);
@@ -90,7 +90,9 @@ const Dish = ({ dish, recent, standalone }) => {
             <div className={cx('top')}>
                 <ConditionalLink to={`/restaurant/${dish.restaurant._id}`} condition={standalone}>
                     <h2>{dish.name}</h2>
-                    {standalone && <span className={cx('restaurant-name')}>{dish.restaurant.name}</span>}
+                    {standalone && (
+                        <span className={cx('restaurant-name')}>{dish.restaurant.name}</span>
+                    )}
                 </ConditionalLink>
                 <img
                     src={dish.vegetarian ? '/assets/veg-icon.png' : '/assets/non-veg-icon.png'}

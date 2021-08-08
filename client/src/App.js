@@ -37,8 +37,8 @@ const App = () => {
         // Get cart data, if authenticated
         const getCart = async () => {
             try {
-                const res = await dataAPI.get('/users/61045a5df4ecda2f10e889c7/cart');
-                dispatchCart({ type: 'init', payload: { newCart: res.data.cart } });
+                const res = await dataAPI.get('/user/cart');
+                dispatchCart({ type: 'init', payload: { newCart: res.data } });
             } catch (e) {
                 console.error(e);
             }
