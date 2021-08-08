@@ -1,0 +1,19 @@
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        display: flex;
+        align-items: center;
+        gap: 1em;
+    }
+
+    svg {
+        height: 2em;
+    }
+
+    span {
+        font-size: 2rem;
+    }
+}

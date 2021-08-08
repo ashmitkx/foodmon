@@ -3,7 +3,8 @@ import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-d
 import './App.css';
 
 import { CartContextProvider, useCartContext } from './contexts/CartContext.js';
-import { dataAPI } from './api.js';
+import { dataAPI, authAPI } from './api.js';
+import Login from './components/Login/Login';
 import MainNav from './components/Nav/MainNav.js';
 import Home from './components/Home/Home.js';
 import SearchPage from './components/Search/SearchPage.js';
@@ -20,7 +21,20 @@ const App = () => {
     const dispatchCart = useCartContext()[1];
 
     useEffect(() => {
-        // Get cart data on mount
+        // Check if user is authenticated, on mount
+        const checkAuth = async () => {
+            try {
+                const res = await authAPI.get('isauth');
+                setIsAuth(res.data.authenticated);
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        checkAuth();
+    }, []);
+
+    useEffect(() => {
+        // Get cart data, if authenticated
         const getCart = async () => {
             try {
                 const res = await dataAPI.get('/users/61045a5df4ecda2f10e889c7/cart');
@@ -29,13 +43,10 @@ const App = () => {
                 console.error(e);
             }
         };
-        getCart();
-
-        // temp fake auth
-        setIsAuth(true);
+        if (isAuth) getCart();
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    }, [isAuth]);
 
     return (
         <>
@@ -45,7 +56,7 @@ const App = () => {
                     <Redirect to='/home' />
                 </ConditionalRoute>
                 <ConditionalRoute path='/login' condition={!isAuth} redirect='/'>
-                    Login
+                    <Login />
                 </ConditionalRoute>
                 <ConditionalRoute path='/home' condition={isAuth} redirect='/login'>
                     <Home />

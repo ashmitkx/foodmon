@@ -1,0 +1,16 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login button {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.login svg {
+  height: 2em;
+}
+.login span {
+  font-size: 2rem;
+}
