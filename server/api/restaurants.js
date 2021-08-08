@@ -59,13 +59,15 @@ const getRestaurantById = async (req, res, next) => {
     // return 400 if id is an invalid ObjectId
     if (!isValidObjectId(id)) return next({ status: 400, message: 'Invalid restaurantId' });
 
-    Restaurants.findById(id)
-        .lean()
-        .then(doc => {
-            if (!doc) return next({ status: 404 });
-            res.json(doc);
-        })
-        .catch(next);
+    let doc;
+    try {
+        doc = await Restaurants.findById(id).lean();
+    } catch (err) {
+        return next(err);
+    }
+
+    if (!doc) return next({ status: 404 });
+    res.json(doc);
 };
 
 const restaurantsApi = { getRestaurants, getRestaurantById };

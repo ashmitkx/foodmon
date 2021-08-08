@@ -23,8 +23,6 @@ router.get('/isauth', (req, res) => {
 
 // logout route
 router.get('/logout', (req, res) => {
-    console.log('route: /login/logout');
-
     req.logout();
     res.redirect(CLIENT_BASE_URL);
 });

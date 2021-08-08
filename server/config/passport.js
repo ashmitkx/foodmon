@@ -9,26 +9,34 @@ passport.use(
             clientSecret: process.env.GOOGLE_CLIENT_SECRET,
             callbackURL: '/auth/google/redirect'
         },
-        (accessToken, refreshToken, profile, done) => {
+        async (accessToken, refreshToken, profile, done) => {
             profile = profile._json;
+            let currentUser;
 
-            // find user in users collection
-            Users.findOne({ googleId: profile.sub })
-                .then(currentUser => {
-                    if (currentUser) return currentUser;
+            // try to find user in users collection
+            try {
+                currentUser = await Users.findOne({ googleId: profile.sub });
+            } catch (err) {
+                done(err);
+            }
 
-                    // create new user if the users collection doesn't have the User
-                    return new Users({
-                        name: profile.name,
-                        googleId: profile.sub,
-                        imgUrl: profile.picture,
-                        email: profile.email,
-                        cart: [],
-                        recent: []
-                    }).save();
-                })
-                .then(user => done(null, user))
-                .catch(done);
+            if (currentUser) return done(null, currentUser);
+
+            // create new user if the users collection doesn't have the user
+            try {
+                currentUser = await new Users({
+                    name: profile.name,
+                    googleId: profile.sub,
+                    imgUrl: profile.picture,
+                    email: profile.email,
+                    cart: [],
+                    recent: []
+                }).save();
+            } catch (err) {
+                done(err);
+            }
+
+            done(null, currentUser);
         }
     )
 );

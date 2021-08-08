@@ -7,7 +7,7 @@ import cookieSession from 'cookie-session';
 import authRoutes from './routes/auth.js';
 import restaurantsRoute from './routes/restaurants.js';
 import dishesRoute from './routes/dishes.js';
-import usersRoute from './routes/users.js';
+import userRoute from './routes/user.js';
 
 // Passport setup
 import './config/passport.js';
@@ -23,6 +23,7 @@ app.use(
         credentials: true // allow session cookie from browser to pass through
     })
 );
+
 app.use(
     cookieSession({
         name: 'session',
@@ -37,6 +38,7 @@ app.use(passport.session());
 
 app.use('/auth', authRoutes);
 
+// Check if user is authenticated
 const authCheck = (req, res, next) => {
     if (req.user) return next();
     res.status(401).send();
@@ -45,7 +47,7 @@ app.all('/api/v1/*', authCheck);
 
 app.use('/api/v1/restaurants', restaurantsRoute);
 app.use('/api/v1/dishes', dishesRoute);
-app.use('/api/v1/users', usersRoute);
+app.use('/api/v1/user', userRoute);
 app.use('*', (req, res, next) => next({ status: 404 }));
 
 // custom error handler
