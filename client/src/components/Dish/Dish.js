@@ -89,7 +89,7 @@ const Dish = ({ dish, recent, standalone }) => {
         <Card img={{ src: dish.imgUrl, alt: 'dish img' }}>
             <div className={cx('top')}>
                 <ConditionalLink to={`/restaurant/${dish.restaurant._id}`} condition={standalone}>
-                    <h2 id={standalone ? undefined : dish._id}>{dish.name}</h2>
+                    <h2>{dish.name}</h2>
                     {standalone && <span className={cx('restaurant-name')}>{dish.restaurant.name}</span>}
                 </ConditionalLink>
                 <img

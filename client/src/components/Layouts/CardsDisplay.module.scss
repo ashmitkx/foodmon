@@ -10,8 +10,9 @@
     }
 
     &.--overflowing {
-        margin: 0 -1.25em;
-        padding: 1em 1.25em;
+        flex-grow: 1;
+        margin: -1.25em;
+        padding: 1.25em;
         @include common.themed-scrollbar;
     }
 }

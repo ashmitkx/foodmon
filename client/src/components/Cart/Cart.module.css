@@ -2,7 +2,7 @@
   min-width: 27em;
   width: 30%;
   max-width: 28em;
-  padding: 0 1.25em 1.25em 1.25em;
+  padding: 1em 1.25em;
   height: 100vh;
   position: sticky;
   top: 0;
@@ -10,6 +10,25 @@
   display: flex;
   flex-flow: column;
   gap: 1.25em;
+}
+
+.empty {
+  flex-grow: 1;
+  padding-bottom: 15%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.7em;
+}
+.empty .title {
+  color: #e65d03;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+.empty .subtitle {
+  color: rgba(34, 34, 34, 0.45);
+  font-size: 1.25rem;
 }
 
 .prices {

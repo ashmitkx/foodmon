@@ -7,8 +7,9 @@
   margin-bottom: 0.75em;
 }
 .cards-display.--overflowing {
-  margin: 0 -1.25em;
-  padding: 1em 1.25em;
+  flex-grow: 1;
+  margin: -1.25em;
+  padding: 1.25em;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: rgba(249, 99, 0, 0.5) transparent;
