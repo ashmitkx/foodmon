@@ -1,32 +1,16 @@
 @use '../../common';
 
-.profile {
-    align-self: center;
-    width: 28em;
+.button {
+    width: 75%;
+    padding: 0.35em 1.25em;
+    border-radius: 6px;
+    border: 2px solid common.$primary-faded;
+    background: common.$primary;
+    color: common.$text-white;
 
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    gap: 1.25em;
-
-    img {
-        height: 10em;
-        width: 10em;
-        border-radius: 20px;
-    }
-
-    button {
-        width: 75%;
-        padding: 0.35em 1.25em;
-        border-radius: 6px;
-        border: 2px solid common.$primary-faded;
-        background: common.$primary;
-        color: common.$text-white;
-
-        text-align: center;
-        font-weight: 500;
-        font-size: 1.25rem;
-    }
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.25rem;
 }
 
 .text {

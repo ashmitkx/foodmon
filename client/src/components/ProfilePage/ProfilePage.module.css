@@ -1,17 +1,4 @@
-.profile {
-  align-self: center;
-  width: 28em;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  gap: 1.25em;
-}
-.profile img {
-  height: 10em;
-  width: 10em;
-  border-radius: 20px;
-}
-.profile button {
+.button {
   width: 75%;
   padding: 0.35em 1.25em;
   border-radius: 6px;
