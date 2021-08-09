@@ -1,6 +1,6 @@
 @use '../../common';
 
-.card {
+.default {
     background: common.$background;
     box-shadow: common.$card-shadow;
 
@@ -10,22 +10,35 @@
     display: flex;
     gap: 1.25em;
 
+    .img {
+        width: 6em;
+        height: 6em;
+        border-radius: 12px;
+        flex-shrink: 0;
+    }
+
+    .details {
+        flex-grow: 1;
+        display: flex;
+        flex-flow: column;
+        justify-content: space-between;
+        gap: 0.25em;
+    }
+
     &.--reverse .img {
         order: 1;
     }
 }
 
-.img {
-    width: 6em;
-    height: 6em;
-    border-radius: 12px;
-    flex-shrink: 0;
-}
-
-.details {
-    flex-grow: 1;
+.hero {
     display: flex;
     flex-flow: column;
-    justify-content: space-between;
-    gap: 0.25em;
+    align-items: center;
+    gap: 1.25em;
+
+    .img {
+        height: 10em;
+        width: 10em;
+        border-radius: 20px;
+    }
 }

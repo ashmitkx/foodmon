@@ -34,7 +34,7 @@ const Recents = () => {
             .split(', ');
 
         return (
-            <CardsDisplay title={`${dayName}, ${dayDate}`} subtitle={time} key={date}>
+            <CardsDisplay layout='grid' title={`${dayName}, ${dayDate}`} subtitle={time} key={date}>
                 {dishes.map(dish => (
                     <Dish standalone recent key={dish._id} dish={dish} />
                 ))}

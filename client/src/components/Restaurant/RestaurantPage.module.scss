@@ -1,21 +1,5 @@
 @use '../../common';
 
-.restaurant {
-    align-self: center;
-    width: 28em;
-
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    gap: 1.25em;
-
-    img {
-        height: 10em;
-        width: 10em;
-        border-radius: 20px;
-    }
-}
-
 .text {
     display: flex;
     flex-flow: column;
@@ -35,7 +19,7 @@
 .details {
     display: flex;
     justify-content: space-around;
-    width: 100%;
+    width: 80%;
 
     padding: 0.5em 0;
     border-block: 3px solid common.$primary-kinda-faded;

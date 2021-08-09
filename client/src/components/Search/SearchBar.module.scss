@@ -6,7 +6,8 @@
     display: flex;
     align-items: center;
     gap: 1em;
-    max-width: 28em;
+    width: 100%;
+    max-width: 22.5em;
 
     input {
         order: 1;
@@ -27,5 +28,6 @@
     svg {
         color: common.$primary;
         height: 1.6em;
+        width: 1.6em;
     }
 }

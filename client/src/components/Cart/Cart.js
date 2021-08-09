@@ -10,7 +10,7 @@ const cx = classnames.bind(styles);
 
 const EmptyCart = () => (
     <section className={cx('cart')}>
-        <CardsDisplay icon={<RiShoppingBag3Line />} title='My Cart' />
+        <CardsDisplay layout='none' icon={<RiShoppingBag3Line />} title='My Cart' />
         <div className={cx('empty')}>
             <span className={cx('title')}>No dishes in your cart, yet.</span>
             <span className={cx('subtitle')}>Order something to eat!</span>
@@ -23,12 +23,18 @@ const Cart = () => {
 
     if (cart.length === 0) return <EmptyCart />;
 
+    const totItems = cart.reduce((acc, dish) => acc + dish.quantity, 0);
     const subTot = cart.reduce((acc, dish) => acc + dish.price * dish.quantity, 0);
     const deliveryFee = Math.round(subTot * 0.0275);
 
     return (
         <section className={cx('cart')}>
-            <CardsDisplay icon={<RiShoppingBag3Line />} title='My Cart' overflowing>
+            <CardsDisplay
+                layout='column'
+                icon={<RiShoppingBag3Line />}
+                title='My Cart'
+                subtitle={totItems > 1 ? `${totItems} Dishes` : `${totItems} Dish`}
+            >
                 {cart.map(dish => (
                     <Dish standalone dish={dish} key={dish._id} />
                 ))}

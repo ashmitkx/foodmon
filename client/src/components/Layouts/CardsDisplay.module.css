@@ -6,8 +6,8 @@
 .cards-display:not(:last-child) {
   margin-bottom: 0.75em;
 }
-.cards-display.--overflowing {
-  flex-grow: 1;
+.cards-display.--column {
+  flex: auto 1 0;
   margin: -1.25em;
   padding: 1.25em;
   overflow-y: scroll;
@@ -15,11 +15,30 @@
   scrollbar-color: rgba(249, 99, 0, 0.5) transparent;
 }
 
+.cards.--grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(23em, 1fr));
+  gap: 1.5em 2em;
+}
+.cards.--column {
+  display: flex;
+  flex-flow: column;
+  gap: 1.5em;
+}
+.cards.--single {
+  display: flex;
+  justify-content: center;
+}
+.cards > * {
+  width: 100%;
+  max-width: 28em;
+}
+
 .titlebar {
   align-self: flex-start;
   display: flex;
   flex-flow: column;
-  gap: 0.1em;
+  gap: 0.15em;
   border: 2px solid rgba(249, 99, 0, 0.08);
   background: rgba(249, 99, 0, 0.08);
   padding: 0.35em 0.8em;
@@ -38,14 +57,4 @@
   font-weight: 500;
   font-size: 0.95rem;
   color: rgba(34, 34, 34, 0.45);
-}
-
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(23em, 1fr));
-  gap: 1.75em 2em;
-}
-.cards > * {
-  width: 100%;
-  max-width: 28em;
 }

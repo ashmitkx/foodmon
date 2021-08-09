@@ -9,11 +9,35 @@
         margin-bottom: 0.75em;
     }
 
-    &.--overflowing {
-        flex-grow: 1;
+    &.--column {
+        flex: auto 1 0;
         margin: -1.25em;
         padding: 1.25em;
         @include common.themed-scrollbar;
+    }
+}
+
+.cards {
+    &.--grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(23em, 1fr));
+        gap: 1.5em 2em;
+    }
+
+    &.--column {
+        display: flex;
+        flex-flow: column;
+        gap: 1.5em;
+    }
+
+    &.--single {
+        display: flex;
+        justify-content: center;
+    }
+
+    & > * {
+        width: 100%;
+        max-width: 28em;
     }
 }
 
@@ -21,7 +45,7 @@
     align-self: flex-start;
     display: flex;
     flex-flow: column;
-    gap: 0.1em;
+    gap: 0.15em;
 
     border: 2px solid common.$primary-faded;
     background: common.$primary-faded;
@@ -43,16 +67,5 @@
         font-weight: 500;
         font-size: 0.95rem;
         color: common.$text-faded;
-    }
-}
-
-.cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(23em, 1fr));
-    gap: 1.75em 2em;
-
-    & > * {
-        width: 100%;
-        max-width: 28em;
     }
 }

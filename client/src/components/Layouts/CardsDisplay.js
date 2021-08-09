@@ -3,9 +3,22 @@ import classnames from 'classnames/bind';
 
 const cx = classnames.bind(styles);
 
-const CardsDisplay = ({ icon, title, subtitle, overflowing, children }) => {
+const CardsDisplay = ({ icon, title, subtitle, layout, children }) => {
+    let layoutModifier;
+    switch (layout) {
+        case 'grid':
+        case 'column':
+        case 'single':
+            layoutModifier = `--${layout}`;
+            break;
+        case 'none':
+            break;
+        default:
+            throw new Error(`Unknown layout prop: '${layout}' in CardsDisplay`);
+    }
+
     return (
-        <section className={cx('cards-display', { '--overflowing': overflowing })}>
+        <section className={cx('cards-display', layoutModifier)}>
             {(title || subtitle) && (
                 <div className={cx('titlebar')}>
                     <div className={cx('title')}>
@@ -15,7 +28,7 @@ const CardsDisplay = ({ icon, title, subtitle, overflowing, children }) => {
                     <span className={cx('subtitle')}>{subtitle}</span>
                 </div>
             )}
-            <div className={cx('cards')}>{children}</div>
+            <div className={cx('cards', layoutModifier)}>{children}</div>
         </section>
     );
 };

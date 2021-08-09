@@ -34,7 +34,7 @@ const RestaurantResults = ({ keyword }) => {
         return <h1 className={cx('message')}>{`No restaurants found for "${keyword}"`}</h1>;
 
     return (
-        <CardsDisplay>
+        <CardsDisplay layout='grid'>
             {restaurants.map(restaurant => (
                 <RestaurantCard key={restaurant._id} restaurant={restaurant} />
             ))}
@@ -61,7 +61,7 @@ const DishResults = ({ keyword }) => {
         return <h1 className={cx('message')}>{`No dishes found for "${keyword}" `}</h1>;
 
     return (
-        <CardsDisplay>
+        <CardsDisplay layout='grid'>
             {dishes.map(dish => (
                 <Dish standalone key={dish._id} dish={dish} />
             ))}
