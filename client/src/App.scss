@@ -100,3 +100,9 @@ main {
     flex-flow: column;
     gap: 1.75em;
 }
+
+.message {
+    color: common.$text-faded;
+    font-weight: 500;
+    font-size: 1.25rem;
+}

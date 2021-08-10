@@ -1,6 +1,6 @@
 @use '../../common';
 
-.default {
+.card {
     background: common.$background;
     box-shadow: common.$card-shadow;
 
@@ -27,18 +27,5 @@
 
     &.--reverse .img {
         order: 1;
-    }
-}
-
-.hero {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-    gap: 1.25em;
-
-    .img {
-        height: 10em;
-        width: 10em;
-        border-radius: 20px;
     }
 }

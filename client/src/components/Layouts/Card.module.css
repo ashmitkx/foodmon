@@ -1,4 +1,4 @@
-.default {
+.card {
   background: #f4f3ed;
   box-shadow: 0px 8px 20px 1px rgba(170, 170, 170, 0.3);
   border-radius: 16px;
@@ -6,31 +6,19 @@
   display: flex;
   gap: 1.25em;
 }
-.default .img {
+.card .img {
   width: 6em;
   height: 6em;
   border-radius: 12px;
   flex-shrink: 0;
 }
-.default .details {
+.card .details {
   flex-grow: 1;
   display: flex;
   flex-flow: column;
   justify-content: space-between;
   gap: 0.25em;
 }
-.default.--reverse .img {
+.card.--reverse .img {
   order: 1;
-}
-
-.hero {
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  gap: 1.25em;
-}
-.hero .img {
-  height: 10em;
-  width: 10em;
-  border-radius: 20px;
 }

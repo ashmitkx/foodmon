@@ -1,0 +1,20 @@
+.hero {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25em;
+}
+.hero.--max-height {
+  flex-grow: 1;
+}
+.hero img {
+  height: 10em;
+  width: 10em;
+  border-radius: 20px;
+}
+.hero > * {
+  width: 100%;
+  max-width: 350px;
+  text-align: center;
+}

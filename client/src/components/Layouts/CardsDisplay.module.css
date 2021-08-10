@@ -25,36 +25,7 @@
   flex-flow: column;
   gap: 1.5em;
 }
-.cards.--single {
-  display: flex;
-  justify-content: center;
-}
 .cards > * {
   width: 100%;
   max-width: 28em;
-}
-
-.titlebar {
-  align-self: flex-start;
-  display: flex;
-  flex-flow: column;
-  gap: 0.15em;
-  border: 2px solid rgba(249, 99, 0, 0.08);
-  background: rgba(249, 99, 0, 0.08);
-  padding: 0.35em 0.8em;
-  border-radius: 8px;
-}
-.titlebar .title {
-  display: flex;
-  align-items: center;
-  gap: 0.6em;
-}
-.titlebar svg {
-  height: 1.25em;
-  color: #e65d03;
-}
-.titlebar .subtitle {
-  font-weight: 500;
-  font-size: 0.95rem;
-  color: rgba(34, 34, 34, 0.45);
 }

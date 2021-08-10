@@ -4,7 +4,7 @@ import styles from './RestaurantPage.module.css';
 import classnames from 'classnames/bind';
 
 import { dataAPI } from '../../api.js';
-import Card from '../Layouts/Card';
+import Hero from '../Layouts/Hero';
 import CardsDisplay from '../Layouts/CardsDisplay.js';
 import Dish from '../Dish/Dish.js';
 import { BiStar, BiTimeFive } from 'react-icons/bi';
@@ -29,34 +29,32 @@ const Restaurant = ({ id }) => {
     }, [id]);
 
     return (
-        <CardsDisplay layout='single'>
-            <Card hero img={{ src: restaurant.imgUrl, alt: 'restaurant img' }}>
-                <div className={cx('text')}>
-                    <h2>{restaurant.name}</h2>
-                    <span>{restaurant.cuisines.join(', ')}</span>
-                </div>
+        <Hero hero img={{ src: restaurant.imgUrl, alt: 'restaurant img' }}>
+            <div className={cx('text')}>
+                <h1>{restaurant.name}</h1>
+                <span>{restaurant.cuisines.join(', ')}</span>
+            </div>
 
-                <div className={cx('details')}>
-                    <div className={cx('info')}>
-                        <BiStar />
-                        <span>{Number(restaurant.rating).toFixed(1)}</span>
-                    </div>
-                    <div className={cx('info')}>
-                        <BiTimeFive />
-                        <span>
-                            {/* 1 Km = 5 mins,
+            <div className={cx('details')}>
+                <div className={cx('info')}>
+                    <BiStar />
+                    <span>{Number(restaurant.rating).toFixed(1)}</span>
+                </div>
+                <div className={cx('info')}>
+                    <BiTimeFive />
+                    <span>
+                        {/* 1 Km = 5 mins,
                             + 20 min cooking time,
                         rounded to the nearest multiple of 5 */}
-                            {Math.round((restaurant.distance * 5 + 20) * 0.2) * 5} Min
-                        </span>
-                    </div>
-                    <div className={cx('info')}>
-                        <RiMapPin2Line />
-                        <span>{Number(restaurant.distance).toFixed(1)} Km</span>
-                    </div>
+                        {Math.round((restaurant.distance * 5 + 20) * 0.2) * 5} Min
+                    </span>
                 </div>
-            </Card>
-        </CardsDisplay>
+                <div className={cx('info')}>
+                    <RiMapPin2Line />
+                    <span>{Number(restaurant.distance).toFixed(1)} Km</span>
+                </div>
+            </div>
+        </Hero>
     );
 };
 

@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
-import styles from './SearchPage.module.css';
-import classnames from 'classnames/bind';
 
 import { dataAPI } from '../../api.js';
 import SearchBar from './SearchBar.js';
@@ -12,8 +10,6 @@ import Dish from '../Dish/Dish.js';
 
 import { BiDish } from 'react-icons/bi';
 import { AiOutlineShop } from 'react-icons/ai';
-
-const cx = classnames.bind(styles);
 
 const RestaurantResults = ({ keyword }) => {
     const [restaurants, setRestaurants] = useState([]);
@@ -31,7 +27,7 @@ const RestaurantResults = ({ keyword }) => {
     }, [keyword]);
 
     if (restaurants.length === 0)
-        return <h1 className={cx('message')}>{`No restaurants found for "${keyword}"`}</h1>;
+        return <span className='message'>{`No restaurants found for "${keyword}"`}</span>;
 
     return (
         <CardsDisplay layout='grid'>
@@ -58,7 +54,7 @@ const DishResults = ({ keyword }) => {
     }, [keyword]);
 
     if (dishes.length === 0)
-        return <h1 className={cx('message')}>{`No dishes found for "${keyword}" `}</h1>;
+        return <h1 className='message'>{`No dishes found for "${keyword}" `}</h1>;
 
     return (
         <CardsDisplay layout='grid'>
@@ -70,7 +66,7 @@ const DishResults = ({ keyword }) => {
 };
 
 const PreResult = () => (
-    <h1 className={cx('message')}>Search for restaurants, dishes and cuisines ...</h1>
+    <span className='message'>Search for restaurants, dishes and cuisines ...</span>
 );
 
 const subNavLinks = [

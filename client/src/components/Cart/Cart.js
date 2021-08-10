@@ -5,12 +5,13 @@ import { useCartContext } from '../../contexts/CartContext';
 import { RiShoppingBag3Line } from 'react-icons/ri';
 import Dish from '../Dish/Dish.js';
 import CardsDisplay from '../Layouts/CardsDisplay.js';
+import Titlebar from '../Titlebar.js/Titlebar';
 
 const cx = classnames.bind(styles);
 
 const EmptyCart = () => (
     <section className={cx('cart')}>
-        <CardsDisplay layout='none' icon={<RiShoppingBag3Line />} title='My Cart' />
+        <Titlebar icon={<RiShoppingBag3Line />}>My Cart</Titlebar>
         <div className={cx('empty')}>
             <span className={cx('title')}>No dishes in your cart, yet.</span>
             <span className={cx('subtitle')}>Order something to eat!</span>

@@ -30,42 +30,8 @@
         gap: 1.5em;
     }
 
-    &.--single {
-        display: flex;
-        justify-content: center;
-    }
-
     & > * {
         width: 100%;
         max-width: 28em;
-    }
-}
-
-.titlebar {
-    align-self: flex-start;
-    display: flex;
-    flex-flow: column;
-    gap: 0.15em;
-
-    border: 2px solid common.$primary-faded;
-    background: common.$primary-faded;
-    padding: 0.35em 0.8em;
-    border-radius: 8px;
-
-    .title {
-        display: flex;
-        align-items: center;
-        gap: 0.6em;
-    }
-
-    svg {
-        height: 1.25em;
-        color: common.$primary;
-    }
-
-    .subtitle {
-        font-weight: 500;
-        font-size: 0.95rem;
-        color: common.$text-faded;
     }
 }

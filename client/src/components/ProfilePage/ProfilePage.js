@@ -4,8 +4,7 @@ import styles from './ProfilePage.module.css';
 import classnames from 'classnames/bind';
 
 import { dataAPI } from '../../api.js';
-import CardsDisplay from '../Layouts/CardsDisplay';
-import Card from '../Layouts/Card';
+import Hero from '../Layouts/Hero';
 import Recents from '../Home/Recents.js';
 
 const cx = classnames.bind(styles);
@@ -33,18 +32,15 @@ const ProfilePage = () => {
 
     return (
         <main>
-            <CardsDisplay layout='single'>
-                <Card hero img={{ src: user.imgUrl, alt: 'me' }}>
-                    <div className={cx('text')}>
-                        <span className={cx('name')}>{user.name}</span>
-                        <span className={cx('email')}>{user.email}</span>
-                    </div>
-                    <button className={cx('button')} onClick={handleLogOut}>
-                        Log Out
-                    </button>
-                </Card>
-            </CardsDisplay>
-
+            <Hero hero img={{ src: user.imgUrl, alt: 'me' }}>
+                <div className={cx('text')}>
+                    <span className={cx('name')}>{user.name}</span>
+                    <span className={cx('email')}>{user.email}</span>
+                </div>
+                <button className={cx('button')} onClick={handleLogOut}>
+                    Log Out
+                </button>
+            </Hero>
             <Recents />
 
             {/* Catch all unknown routes and redirect to /profile */}

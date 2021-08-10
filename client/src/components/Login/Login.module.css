@@ -1,16 +1,56 @@
-.login {
+.title {
+  color: #e65d03;
+  font-size: 3.25rem;
+}
+
+.button {
   display: flex;
   justify-content: center;
   align-items: center;
+  gap: 1.5em;
+  margin-bottom: 5.5em;
+  padding: 0.5em 1em;
+  border-radius: 6px;
+  background: #e65d03;
+  color: #f2f2f2;
 }
-.login button {
+.button span {
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+.button svg {
+  height: 1.75em;
+  width: 1.75em;
+}
+
+.made-by {
+  padding-inline: 0.75em;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+.made-by span {
+  color: #ff0055;
+}
+
+.author {
   display: flex;
-  align-items: center;
-  gap: 1em;
+  flex-flow: column;
+  gap: 0.1em;
+  text-align: left;
 }
-.login svg {
-  height: 2em;
+.author .name {
+  font-size: 1.3rem;
 }
-.login span {
-  font-size: 2rem;
+.author .tag {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: rgba(34, 34, 34, 0.45);
+}
+
+.repo {
+  padding: 0.3em 0;
+  border-radius: 4px;
+  background: rgba(249, 99, 0, 0.08);
+  color: #e65d03;
+  font-weight: 500;
 }
