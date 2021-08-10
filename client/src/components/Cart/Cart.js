@@ -1,6 +1,7 @@
 import styles from './Cart.module.css';
 import classnames from 'classnames/bind';
 
+import { dataAPI } from '../../api.js';
 import { useCartContext } from '../../contexts/CartContext';
 import { RiShoppingBag3Line } from 'react-icons/ri';
 import Dish from '../Dish/Dish.js';
@@ -20,13 +21,22 @@ const EmptyCart = () => (
 );
 
 const Cart = () => {
-    const cart = useCartContext()[0];
+    const [cart, dispatchCart] = useCartContext();
 
     if (cart.length === 0) return <EmptyCart />;
 
     const totItems = cart.reduce((acc, dish) => acc + dish.quantity, 0);
     const subTot = cart.reduce((acc, dish) => acc + dish.price * dish.quantity, 0);
     const deliveryFee = Math.round(subTot * 0.0275);
+
+    const onCheckout = async () => {
+        try {
+            await dataAPI.delete('/user/cart');
+            dispatchCart({ type: 'empty' });
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     return (
         <section className={cx('cart')}>
@@ -55,7 +65,9 @@ const Cart = () => {
                     <span className={cx('price-value')}>₹ {subTot + deliveryFee}</span>
                 </div>
             </div>
-            <button className={cx('checkout')}>Checkout</button>
+            <button className={cx('checkout')} onClick={onCheckout}>
+                Checkout
+            </button>
         </section>
     );
 };

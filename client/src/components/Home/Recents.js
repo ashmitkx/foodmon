@@ -19,7 +19,11 @@ const Recents = () => {
         getRecentDishes();
     }, []);
 
-    return Object.entries(dateGroups).map(([date, dishes]) => {
+    const entries = Object.entries(dateGroups);
+    if (entries.length === 0)
+        return <span className='message'>You haven't placed any orders, yet!</span>;
+
+    return entries.map(([date, dishes]) => {
         const options = {
             weekday: 'short',
             year: 'numeric',

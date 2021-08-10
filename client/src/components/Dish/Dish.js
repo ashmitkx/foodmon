@@ -71,7 +71,7 @@ const Dish = ({ dish, recent, standalone }) => {
             await dataAPI.put('/user/cart', { _id: dishId, quantity: newQuantity });
             dispatchCart({ type: 'update', payload: { dishId, quantity: newQuantity } });
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
 
@@ -81,7 +81,7 @@ const Dish = ({ dish, recent, standalone }) => {
             const res = await dataAPI.post('/user/cart', { _id });
             dispatchCart({ type: 'add', payload: { dish: res.data } });
         } catch (err) {
-            console.log(err);
+            console.error(err);
         }
     };
 

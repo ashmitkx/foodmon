@@ -19,7 +19,7 @@ const Login = () => {
                     <span>Log In with Google</span>
                 </button>
                 <span className={cx('made-by')}>
-                    Made with <span>❤</span> by
+                    Made for Devsoc, with <span>❤</span> by
                 </span>
                 <Card
                     img={{

@@ -20,7 +20,7 @@ const RestaurantResults = ({ keyword }) => {
                 const res = await dataAPI.get(`/restaurants?sortby=rating&&keyword=${keyword}`);
                 setRestaurants(res.data);
             } catch (err) {
-                console.log(err);
+                console.error(err);
             }
         };
         searchRestaurants(keyword);
@@ -47,7 +47,7 @@ const DishResults = ({ keyword }) => {
                 const res = await dataAPI.get(`/dishes?keyword=${keyword}`);
                 setDishes(res.data);
             } catch (err) {
-                console.log(err);
+                console.error(err);
             }
         };
         searchDishes(keyword);
