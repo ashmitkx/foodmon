@@ -6,18 +6,11 @@ const cartReducer = (cart, action) => {
             return action.payload.newCart;
         case 'add': {
             const { dish } = action.payload;
-
-            // Ensure dish doesnt already exist in cart
-            if (cart.some(cartDish => cartDish._id === dish._id)) return cart;
-
             return [...cart, dish];
         }
         case 'update': {
             const { dishId, quantity } = action.payload;
             const index = cart.findIndex(dish => dish._id === dishId);
-
-            // Ensure dish doesnt exist in cart
-            if (index === -1) return cart;
 
             // Update quantity if it is +ve, else remove the dish from the cart
             if (quantity > 0) cart[index].quantity = quantity;

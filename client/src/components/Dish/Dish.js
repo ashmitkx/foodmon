@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Dish.module.css';
 import classnames from 'classnames/bind';
@@ -10,7 +11,7 @@ import Card from '../Layouts/Card';
 
 const cx = classnames.bind(styles);
 
-const QuantitySelect = ({ type, onUpdate, onAdd, children: quantity }) => {
+const QuantitySelect = ({ type, onUpdate, onAdd, disabled, children: quantity }) => {
     switch (type) {
         case 'recent':
             return (
@@ -22,11 +23,11 @@ const QuantitySelect = ({ type, onUpdate, onAdd, children: quantity }) => {
         case 'edit':
             return (
                 <div className={cx('quantity')}>
-                    <button onClick={() => onUpdate(1)}>
+                    <button onClick={() => onUpdate(1)} disabled={disabled}>
                         <FiPlus />
                     </button>
                     <span>{quantity}</span>
-                    <button onClick={() => onUpdate(-1)}>
+                    <button onClick={() => onUpdate(-1)} disabled={disabled}>
                         {quantity > 1 ? (
                             <FiMinus />
                         ) : (
@@ -37,7 +38,7 @@ const QuantitySelect = ({ type, onUpdate, onAdd, children: quantity }) => {
             );
         case 'add':
             return (
-                <button className={cx('quantity')} onClick={onAdd}>
+                <button className={cx('quantity')} onClick={onAdd} disabled={disabled}>
                     <FiPlus />
                     <span>Add</span>
                 </button>
@@ -52,6 +53,7 @@ const ConditionalLink = ({ to, condition, children }) =>
 
 const Dish = ({ dish, recent, standalone }) => {
     const [cart, dispatchCart] = useCartContext();
+    const [loading, setLoading] = useState(false);
 
     if (cart === undefined) return null;
 
@@ -66,24 +68,31 @@ const Dish = ({ dish, recent, standalone }) => {
     else quantitySelectType = 'add';
 
     const onUpdate = async change => {
+        setLoading(true);
         const dishId = dish._id;
         const newQuantity = quantity + change;
 
         try {
             await dataAPI.put('/user/cart', { _id: dishId, quantity: newQuantity });
+            setLoading(false);
             dispatchCart({ type: 'update', payload: { dishId, quantity: newQuantity } });
         } catch (err) {
+            setLoading(false);
             console.error(err);
         }
     };
 
     const onAdd = async () => {
+        setLoading(true);
         const _id = dish._id;
+
         try {
             const res = await dataAPI.post('/user/cart', { _id });
             dispatchCart({ type: 'add', payload: { dish: res.data } });
         } catch (err) {
             console.error(err);
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -105,7 +114,12 @@ const Dish = ({ dish, recent, standalone }) => {
 
             <div className={cx('bottom')}>
                 <span className={cx('price')}>₹ {dish.price}</span>
-                <QuantitySelect type={quantitySelectType} onUpdate={onUpdate} onAdd={onAdd}>
+                <QuantitySelect
+                    disabled={loading}
+                    type={quantitySelectType}
+                    onUpdate={onUpdate}
+                    onAdd={onAdd}
+                >
                     {quantity}
                 </QuantitySelect>
             </div>
