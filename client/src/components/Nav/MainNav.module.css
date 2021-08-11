@@ -19,13 +19,7 @@
   background-color: rgba(249, 99, 0, 0.08);
   border-radius: 8px;
 }
-.main-nav svg,
-.main-nav img {
-  height: 1.75em;
-}
 .main-nav svg {
+  height: 1.75em;
   color: #e65d03;
-}
-.main-nav img {
-  border-radius: 50px;
 }

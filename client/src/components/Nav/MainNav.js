@@ -1,6 +1,7 @@
 import styles from './MainNav.module.css';
 import classnames from 'classnames/bind';
 
+import { ReactComponent as Logo } from '../../images/logo.svg';
 import { BiHomeAlt, BiSearch, BiFace } from 'react-icons/bi';
 import { NavLink } from 'react-router-dom';
 
@@ -10,7 +11,7 @@ const MainNav = () => {
     return (
         <div className={cx('main-nav')}>
             <div className={cx('logo')}>
-                <img src='/assets/logo.svg' alt='logo' />
+                <Logo />
             </div>
             <nav>
                 <ul>

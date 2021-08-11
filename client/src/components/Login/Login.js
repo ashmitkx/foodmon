@@ -1,6 +1,7 @@
 import styles from './Login.module.css';
 import classnames from 'classnames/bind';
 
+import logo from '../../images/logo.svg';
 import { AiOutlineGoogle } from 'react-icons/ai';
 import Hero from '../Layouts/Hero';
 import Card from '../Layouts/Card';
@@ -55,7 +56,7 @@ const Credit = () => (
 
 const Login = () => (
     <main className={cx('login')}>
-        <Hero maxHeight img={{ src: '/assets/logo.svg', alt: 'logo' }}>
+        <Hero maxHeight img={{ src: logo, alt: 'logo' }}>
             <LoginCard />
             <Credit />
         </Hero>

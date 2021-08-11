@@ -25,16 +25,8 @@
         border-radius: 8px;
     }
 
-    svg,
-    img {
-        height: 1.75em;
-    }
-
     svg {
+        height: 1.75em;
         color: common.$primary;
-    }
-
-    img {
-        border-radius: 50px;
     }
 }

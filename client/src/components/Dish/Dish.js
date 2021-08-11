@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 import styles from './Dish.module.css';
 import classnames from 'classnames/bind';
 
+import vegIcon from '../../images/veg-icon.png';
+import nonVegIcon from '../../images/non-veg-icon.png';
 import { dataAPI } from '../../api.js';
 import { useCartContext } from '../../contexts/CartContext';
 import { FiPlus, FiMinus } from 'react-icons/fi';
@@ -106,7 +108,7 @@ const Dish = ({ dish, recent, standalone }) => {
                     )}
                 </ConditionalLink>
                 <img
-                    src={dish.vegetarian ? '/assets/veg-icon.png' : '/assets/non-veg-icon.png'}
+                    src={dish.vegetarian ? vegIcon : nonVegIcon}
                     alt='veg-option'
                     className={cx('veg-option')}
                 />
