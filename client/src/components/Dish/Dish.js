@@ -53,6 +53,8 @@ const ConditionalLink = ({ to, condition, children }) =>
 const Dish = ({ dish, recent, standalone }) => {
     const [cart, dispatchCart] = useCartContext();
 
+    if (cart === undefined) return null;
+
     /*  Try to set quantity if dish object contains quantity, 
         else try to find the dish quantity in the cart,
         otherwise quantity will be undefined. */

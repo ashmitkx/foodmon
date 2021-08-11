@@ -17,11 +17,11 @@ const ConditionalRoute = ({ children, condition, redirect, ...rest }) => (
 );
 
 const App = () => {
-    const [isAuth, setIsAuth] = useState(false);
+    const [isAuth, setIsAuth] = useState(undefined);
     const dispatchCart = useCartContext()[1];
 
+    // Check if user is authenticated, on mount
     useEffect(() => {
-        // Check if user is authenticated, on mount
         const checkAuth = async () => {
             try {
                 const res = await authAPI.get('isauth');
@@ -33,8 +33,8 @@ const App = () => {
         checkAuth();
     }, []);
 
+    // Get cart data, if authenticated
     useEffect(() => {
-        // Get cart data, if authenticated
         const getCart = async () => {
             try {
                 const res = await dataAPI.get('/user/cart');
@@ -47,6 +47,8 @@ const App = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuth]);
+
+    if (isAuth === undefined) return null;
 
     return (
         <>

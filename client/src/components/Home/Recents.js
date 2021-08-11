@@ -5,7 +5,7 @@ import Dish from '../Dish/Dish.js';
 import CardsDisplay from '../Layouts/CardsDisplay.js';
 
 const Recents = () => {
-    const [dateGroups, setDateGroups] = useState({});
+    const [dateGroups, setDateGroups] = useState(undefined);
 
     useEffect(() => {
         const getRecentDishes = async () => {
@@ -18,6 +18,8 @@ const Recents = () => {
         };
         getRecentDishes();
     }, []);
+
+    if (dateGroups === undefined) return null;
 
     const entries = Object.entries(dateGroups);
     if (entries.length === 0)

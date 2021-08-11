@@ -1,6 +1,5 @@
 import { createContext, useReducer, useContext } from 'react';
 
-const initialCart = [];
 const cartReducer = (cart, action) => {
     switch (action.type) {
         case 'init':
@@ -27,15 +26,17 @@ const cartReducer = (cart, action) => {
             return [...cart];
         }
         case 'empty':
-            return initialCart;
+            return [];
         default:
             throw new Error('Unknown cartReducer action type');
     }
 };
 
-const CartContext = createContext([[], () => {}]);
+const CartContext = createContext([undefined, () => {}]);
+
 export const CartContextProvider = ({ children }) => {
-    const cartHook = useReducer(cartReducer, []);
+    const cartHook = useReducer(cartReducer, undefined);
     return <CartContext.Provider value={cartHook}>{children}</CartContext.Provider>;
 };
+
 export const useCartContext = () => useContext(CartContext);

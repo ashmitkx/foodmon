@@ -12,7 +12,7 @@ import { BiDish } from 'react-icons/bi';
 import { AiOutlineShop } from 'react-icons/ai';
 
 const RestaurantResults = ({ keyword }) => {
-    const [restaurants, setRestaurants] = useState([]);
+    const [restaurants, setRestaurants] = useState(undefined);
 
     useEffect(() => {
         const searchRestaurants = async keyword => {
@@ -23,11 +23,14 @@ const RestaurantResults = ({ keyword }) => {
                 console.error(err);
             }
         };
-        searchRestaurants(keyword);
+        if (keyword) searchRestaurants(keyword);
     }, [keyword]);
 
+    if (restaurants === undefined)
+        return <span className='message'>Search for restaurants, dishes and cuisines ...</span>;
+
     if (restaurants.length === 0)
-        return <span className='message'>{`No restaurants found for "${keyword}"`}</span>;
+        return <span className='message'>{`No restaurants found for '${keyword}'`}</span>;
 
     return (
         <CardsDisplay layout='grid'>
@@ -39,7 +42,7 @@ const RestaurantResults = ({ keyword }) => {
 };
 
 const DishResults = ({ keyword }) => {
-    const [dishes, setDishes] = useState([]);
+    const [dishes, setDishes] = useState(undefined);
 
     useEffect(() => {
         const searchDishes = async keyword => {
@@ -50,8 +53,11 @@ const DishResults = ({ keyword }) => {
                 console.error(err);
             }
         };
-        searchDishes(keyword);
+        if (keyword) searchDishes(keyword);
     }, [keyword]);
+
+    if (dishes === undefined)
+        return <span className='message'>Search for restaurants, dishes and cuisines ...</span>;
 
     if (dishes.length === 0)
         return <h1 className='message'>{`No dishes found for "${keyword}" `}</h1>;
@@ -64,10 +70,6 @@ const DishResults = ({ keyword }) => {
         </CardsDisplay>
     );
 };
-
-const PreResult = () => (
-    <span className='message'>Search for restaurants, dishes and cuisines ...</span>
-);
 
 const subNavLinks = [
     {
@@ -99,10 +101,10 @@ const SearchPage = () => {
                     <Redirect to='/search/restaurants' />
                 </Route>
                 <Route path='/search/restaurants'>
-                    {keyword ? <RestaurantResults keyword={keyword} /> : <PreResult />}
+                    <RestaurantResults keyword={keyword} />
                 </Route>
                 <Route path='/search/dishes'>
-                    {keyword ? <DishResults keyword={keyword} /> : <PreResult />}
+                    <DishResults keyword={keyword} />
                 </Route>
                 {/* Catch all unknown routes and redirect to /search */}
                 <Route path='/search/*'>

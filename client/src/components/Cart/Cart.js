@@ -10,6 +10,12 @@ import Titlebar from '../Titlebar.js/Titlebar';
 
 const cx = classnames.bind(styles);
 
+const UndefinedCart = () => (
+    <section className={cx('cart')}>
+        <Titlebar icon={<RiShoppingBag3Line />}>My Cart</Titlebar>
+    </section>
+);
+
 const EmptyCart = () => (
     <section className={cx('cart')}>
         <Titlebar icon={<RiShoppingBag3Line />}>My Cart</Titlebar>
@@ -23,6 +29,7 @@ const EmptyCart = () => (
 const Cart = () => {
     const [cart, dispatchCart] = useCartContext();
 
+    if (cart === undefined) return <UndefinedCart />;
     if (cart.length === 0) return <EmptyCart />;
 
     const totItems = cart.reduce((acc, dish) => acc + dish.quantity, 0);
