@@ -5,7 +5,7 @@ import { dataAPI } from '../../api.js';
 import { useCartContext } from '../../contexts/CartContext';
 import { RiShoppingBag3Line } from 'react-icons/ri';
 import Dish from '../Dish/Dish.js';
-import CardsDisplay from '../Layouts/CardsDisplay.js';
+import CardsDisplay from '../Layouts/CardsDisplay';
 import Titlebar from '../Titlebar.js/Titlebar';
 
 const cx = classnames.bind(styles);
@@ -48,10 +48,10 @@ const Cart = () => {
     return (
         <section className={cx('cart')}>
             <CardsDisplay
-                layout='column'
+                overflowing
                 icon={<RiShoppingBag3Line />}
-                title='My Cart'
                 subtitle={totItems > 1 ? `${totItems} Dishes` : `${totItems} Dish`}
+                title='My Cart'
             >
                 {cart.map(dish => (
                     <Dish standalone dish={dish} key={dish._id} />

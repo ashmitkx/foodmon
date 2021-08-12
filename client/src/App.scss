@@ -67,8 +67,6 @@ body {
     font-family: Ubuntu, sans-serif;
     color: common.$text-dark;
     background: common.$background;
-    max-width: 130rem;
-    margin: 0 auto;
 }
 
 h1 {
@@ -85,24 +83,41 @@ h2 {
     App Layout
     =========== */
 
-#root {
-    display: flex;
+html {
+    @media (max-width: 540px) {
+        font-size: 15px;
+    }
 }
 
 main {
     height: 100vh;
     @include common.themed-scrollbar;
 
-    flex-grow: 1;
-    padding: 1.25em;
+    padding: 1.35em 0.8em 0.8em 0.8em;
 
     display: flex;
     flex-flow: column;
     gap: 1.75em;
+
+    // For cart at the right
+    @media (min-width: 1346px) {
+        margin-right: 29rem;
+    }
+
+    // For Main-Nav at the left
+    @media (min-width: 541px) {
+        margin-left: 4.25rem;
+    }
+
+    // For Main-Nav at the bottom
+    @media (max-width: 540px) {
+        padding-bottom: 5.5rem;
+    }
 }
 
 .message {
     color: common.$text-faded;
     font-weight: 500;
     font-size: 1.25rem;
+    text-align: center;
 }

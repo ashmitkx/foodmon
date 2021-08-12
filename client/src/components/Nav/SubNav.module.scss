@@ -1,9 +1,30 @@
 @use '../../common';
 
 .subnav {
+    &.--center-on-small-screens {
+        @media (max-width: 875px) {
+            align-self: center;
+
+            ul {
+                gap: 2.25em;
+            }
+        }
+    }
+
     ul {
         display: flex;
         gap: 2.25em;
+
+        @media (max-width: 800px) {
+            gap: 0.8em;
+        }
+
+        overflow-x: scroll;
+        scrollbar-width: none;
+    }
+
+    li {
+        flex-shrink: 0;
     }
 
     a {

@@ -3,8 +3,27 @@
   flex-flow: column;
   gap: 1em;
 }
+@media (max-width: 875px) {
+  .cards-display {
+    align-self: center;
+    width: 100%;
+    max-width: 28em;
+  }
+}
 .cards-display:not(:last-child) {
   margin-bottom: 0.75em;
+}
+.cards-display.--overflowing {
+  flex-grow: 1;
+}
+@media (min-width: 1346px) {
+  .cards-display.--overflowing {
+    margin: -1.25em;
+    padding: 1.25em;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(249, 99, 0, 0.5) transparent;
+  }
 }
 
 .cards {

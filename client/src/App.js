@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import './App.css';
 
+import { useWindowDimensions } from './hooks/useWindowDimensions.js';
 import { CartContextProvider, useCartContext } from './contexts/CartContext.js';
 import { dataAPI, authAPI } from './api.js';
 import Login from './components/Login/Login';
@@ -17,6 +18,7 @@ const ConditionalRoute = ({ children, condition, redirect, ...rest }) => (
 );
 
 const App = () => {
+    const { width } = useWindowDimensions();
     const [isAuth, setIsAuth] = useState(undefined);
     const dispatchCart = useCartContext()[1];
 
@@ -69,6 +71,11 @@ const App = () => {
                 <ConditionalRoute path='/profile' condition={isAuth} redirect='/login'>
                     <ProfilePage />
                 </ConditionalRoute>
+                {width <= 1345 && (
+                    <ConditionalRoute path='/cart' condition={isAuth} redirect='/login'>
+                        <Cart seperatePage />
+                    </ConditionalRoute>
+                )}
                 <ConditionalRoute path='/restaurant/:id' condition={isAuth} redirect='/login'>
                     <RestaurantPage />
                 </ConditionalRoute>
@@ -77,7 +84,7 @@ const App = () => {
                     <Redirect to='/' />
                 </Route>
             </Switch>
-            {isAuth && <Cart />}
+            {isAuth && width > 1345 && <Cart />}
         </>
     );
 };

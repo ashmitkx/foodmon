@@ -59,8 +59,6 @@ body {
   font-family: Ubuntu, sans-serif;
   color: #2b2b2b;
   background: #f4f3ed;
-  max-width: 130rem;
-  margin: 0 auto;
 }
 
 h1 {
@@ -76,8 +74,10 @@ h2 {
 /* ============ 
     App Layout
     =========== */
-#root {
-  display: flex;
+@media (max-width: 540px) {
+  html {
+    font-size: 15px;
+  }
 }
 
 main {
@@ -85,15 +85,30 @@ main {
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: rgba(249, 99, 0, 0.5) transparent;
-  flex-grow: 1;
-  padding: 1.25em;
+  padding: 1.35em 0.8em 0.8em 0.8em;
   display: flex;
   flex-flow: column;
   gap: 1.75em;
+}
+@media (min-width: 1346px) {
+  main {
+    margin-right: 29rem;
+  }
+}
+@media (min-width: 541px) {
+  main {
+    margin-left: 4.25rem;
+  }
+}
+@media (max-width: 540px) {
+  main {
+    padding-bottom: 5.5rem;
+  }
 }
 
 .message {
   color: rgba(34, 34, 34, 0.45);
   font-weight: 500;
   font-size: 1.25rem;
+  text-align: center;
 }

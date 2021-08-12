@@ -1,13 +1,15 @@
 @use '../../common';
 
 .search {
-    align-self: flex-start;
-
     display: flex;
     align-items: center;
     gap: 1em;
+    max-width: 25em;
     width: 100%;
-    max-width: 22.5em;
+
+    @media (max-width: 875px) {
+        align-self: center;
+    }
 
     input {
         order: 1;

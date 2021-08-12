@@ -5,8 +5,8 @@ import Titlebar from '../Titlebar.js/Titlebar';
 
 const cx = classnames.bind(styles);
 
-const CardsDisplay = ({ icon, title, subtitle, children }) => (
-    <section className={cx('cards-display')}>
+const CardsDisplay = ({ icon, title, subtitle, overflowing, children }) => (
+    <section className={cx('cards-display', { '--overflowing': overflowing })}>
         {(title || subtitle) && (
             <Titlebar subtitle={subtitle} icon={icon}>
                 {title}

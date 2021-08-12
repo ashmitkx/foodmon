@@ -1,15 +1,27 @@
 .main-nav {
-  height: 100vh;
-  position: sticky;
-  top: 0;
-  padding: 0.6em 0.5em;
+  background-color: #f4f3ed;
+  padding: 0.5em;
+  position: fixed;
+  left: 0;
+  z-index: 999;
 }
-.main-nav,
+@media (max-width: 540px) {
+  .main-nav {
+    width: 100vw;
+    bottom: 0;
+  }
+}
 .main-nav ul {
   display: flex;
   flex-flow: column;
   align-items: center;
   gap: 1.5em;
+}
+@media (max-width: 540px) {
+  .main-nav ul {
+    flex-flow: row;
+    justify-content: space-evenly;
+  }
 }
 .main-nav a,
 .main-nav .logo {

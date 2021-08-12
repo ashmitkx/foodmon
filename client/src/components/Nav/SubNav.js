@@ -5,8 +5,11 @@ import classnames from 'classnames/bind';
 const cx = classnames.bind(styles);
 
 const SubNav = ({ basePage, links }) => {
+    let modifier;
+    if (links.length <= 2) modifier = '--center-on-small-screens';
+
     return (
-        <nav className={cx('subnav')}>
+        <nav className={cx('subnav', modifier)}>
             <ul>
                 {links.map(link => (
                     <li key={link.subPage}>

@@ -6,7 +6,7 @@
   gap: 1.25em;
 }
 .hero.--max-height {
-  flex-grow: 1;
+  height: 100vh;
 }
 .hero img {
   height: 10em;

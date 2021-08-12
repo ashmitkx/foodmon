@@ -55,12 +55,10 @@ const Credit = () => (
 );
 
 const Login = () => (
-    <main className={cx('login')}>
-        <Hero maxHeight img={{ src: logo, alt: 'logo' }}>
-            <LoginCard />
-            <Credit />
-        </Hero>
-    </main>
+    <Hero maxHeight img={{ src: logo, alt: 'logo' }}>
+        <LoginCard />
+        <Credit />
+    </Hero>
 );
 
 export default Login;
