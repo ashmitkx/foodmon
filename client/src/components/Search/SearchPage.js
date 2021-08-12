@@ -33,7 +33,7 @@ const RestaurantResults = ({ keyword }) => {
         return <span className='message'>{`No restaurants found for '${keyword}'`}</span>;
 
     return (
-        <CardsDisplay layout='grid'>
+        <CardsDisplay>
             {restaurants.map(restaurant => (
                 <RestaurantCard key={restaurant._id} restaurant={restaurant} />
             ))}
@@ -63,7 +63,7 @@ const DishResults = ({ keyword }) => {
         return <h1 className='message'>{`No dishes found for "${keyword}" `}</h1>;
 
     return (
-        <CardsDisplay layout='grid'>
+        <CardsDisplay>
             {dishes.map(dish => (
                 <Dish standalone key={dish._id} dish={dish} />
             ))}

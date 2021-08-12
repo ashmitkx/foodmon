@@ -27,7 +27,7 @@ const SortedRestaurants = ({ sortby }) => {
     }, [sortby]);
 
     return (
-        <CardsDisplay layout='grid'>
+        <CardsDisplay>
             {restaurants.map(restaurant => (
                 <RestaurantCard key={restaurant._id} restaurant={restaurant} />
             ))}
@@ -58,12 +58,7 @@ const GroupedRestaurants = ({ groupby }) => {
     }, [groupby]);
 
     return Object.entries(restaurantGroups).map(([cuisine, restaurants]) => (
-        <CardsDisplay
-            layout='grid'
-            icon={cuisineEmojis[cuisine.toUpperCase()]}
-            title={cuisine}
-            key={cuisine}
-        >
+        <CardsDisplay icon={cuisineEmojis[cuisine.toUpperCase()]} title={cuisine} key={cuisine}>
             {restaurants.map(restaurant => (
                 <RestaurantCard key={restaurant._id} restaurant={restaurant} />
             ))}

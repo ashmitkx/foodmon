@@ -8,27 +8,12 @@
     &:not(:last-child) {
         margin-bottom: 0.75em;
     }
-
-    &.--column {
-        flex: auto 1 0;
-        margin: -1.25em;
-        padding: 1.25em;
-        @include common.themed-scrollbar;
-    }
 }
 
 .cards {
-    &.--grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(23em, 1fr));
-        gap: 1.5em 2em;
-    }
-
-    &.--column {
-        display: flex;
-        flex-flow: column;
-        gap: 1.5em;
-    }
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(23em, 1fr));
+    gap: 1.5em 2em;
 
     & > * {
         width: 100%;

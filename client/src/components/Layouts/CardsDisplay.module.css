@@ -6,24 +6,11 @@
 .cards-display:not(:last-child) {
   margin-bottom: 0.75em;
 }
-.cards-display.--column {
-  flex: auto 1 0;
-  margin: -1.25em;
-  padding: 1.25em;
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(249, 99, 0, 0.5) transparent;
-}
 
-.cards.--grid {
+.cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(23em, 1fr));
   gap: 1.5em 2em;
-}
-.cards.--column {
-  display: flex;
-  flex-flow: column;
-  gap: 1.5em;
 }
 .cards > * {
   width: 100%;

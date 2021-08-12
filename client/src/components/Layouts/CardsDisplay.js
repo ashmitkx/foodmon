@@ -5,27 +5,15 @@ import Titlebar from '../Titlebar.js/Titlebar';
 
 const cx = classnames.bind(styles);
 
-const CardsDisplay = ({ icon, title, subtitle, layout, children }) => {
-    let layoutModifier;
-    switch (layout) {
-        case 'grid':
-        case 'column':
-            layoutModifier = `--${layout}`;
-            break;
-        default:
-            throw new Error(`Unknown layout prop: '${layout}' in CardsDisplay`);
-    }
-
-    return (
-        <section className={cx('cards-display', layoutModifier)}>
-            {(title || subtitle) && (
-                <Titlebar subtitle={subtitle} icon={icon}>
-                    {title}
-                </Titlebar>
-            )}
-            <div className={cx('cards', layoutModifier)}>{children}</div>
-        </section>
-    );
-};
+const CardsDisplay = ({ icon, title, subtitle, children }) => (
+    <section className={cx('cards-display')}>
+        {(title || subtitle) && (
+            <Titlebar subtitle={subtitle} icon={icon}>
+                {title}
+            </Titlebar>
+        )}
+        <div className={cx('cards')}>{children}</div>
+    </section>
+);
 
 export default CardsDisplay;

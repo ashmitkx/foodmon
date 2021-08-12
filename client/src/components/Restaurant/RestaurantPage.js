@@ -74,7 +74,7 @@ const Dishes = ({ restaurantId }) => {
     }, [restaurantId]);
 
     return Object.entries(dishGroups).map(([section, dishes]) => (
-        <CardsDisplay layout='grid' title={section} key={section}>
+        <CardsDisplay title={section} key={section}>
             {dishes.map(dish => (
                 <Dish key={dish._id} dish={dish} />
             ))}
