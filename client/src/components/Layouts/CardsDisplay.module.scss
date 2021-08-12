@@ -16,12 +16,12 @@
     }
 
     &.--overflowing {
+        @include common.themed-scrollbar($direction: y, $width: thin);
         flex-grow: 1;
 
         @media (min-width: 1346px) {
-            margin: -1.25em;
-            padding: 1.25em;
-            @include common.themed-scrollbar;
+            margin: -0.8em;
+            padding: 0.8em;
         }
     }
 }

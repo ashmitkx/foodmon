@@ -9,8 +9,19 @@
 .subnav ul {
   display: flex;
   gap: 2.25em;
-  overflow-x: scroll;
+  overflow-x: auto;
   scrollbar-width: none;
+  scrollbar-color: rgba(249, 99, 0, 0.5) rgba(34, 34, 34, 0.15);
+}
+.subnav ul::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}
+.subnav ul::-webkit-scrollbar-thumb {
+  background-color: rgba(249, 99, 0, 0.5);
+}
+.subnav ul::-webkit-scrollbar-track {
+  background-color: rgba(34, 34, 34, 0.15);
 }
 @media (max-width: 800px) {
   .subnav ul {

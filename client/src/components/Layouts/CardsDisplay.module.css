@@ -14,15 +14,25 @@
   margin-bottom: 0.75em;
 }
 .cards-display.--overflowing {
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(249, 99, 0, 0.5) rgba(34, 34, 34, 0.15);
   flex-grow: 1;
+}
+.cards-display.--overflowing::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.cards-display.--overflowing::-webkit-scrollbar-thumb {
+  background-color: rgba(249, 99, 0, 0.5);
+}
+.cards-display.--overflowing::-webkit-scrollbar-track {
+  background-color: rgba(34, 34, 34, 0.15);
 }
 @media (min-width: 1346px) {
   .cards-display.--overflowing {
-    margin: -1.25em;
-    padding: 1.25em;
-    overflow-y: scroll;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(249, 99, 0, 0.5) transparent;
+    margin: -0.8em;
+    padding: 0.8em;
   }
 }
 

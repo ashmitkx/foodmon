@@ -8,8 +8,32 @@ $text-white: #f2f2f2;
 
 $card-shadow: 0px 8px 20px 1px rgba(170, 170, 170, 0.3);
 
-@mixin themed-scrollbar {
-    overflow-y: scroll;
-    scrollbar-width: thin;
-    scrollbar-color: $primary-kinda-faded transparent;
+@mixin themed-scrollbar($direction, $width) {
+    @if $direction == y {
+        overflow-y: auto;
+    } @else {
+        overflow-x: auto;
+    }
+
+    @if $width == thin {
+        scrollbar-width: thin;
+        &::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+    } @else {
+        scrollbar-width: none;
+        &::-webkit-scrollbar {
+            width: 0px;
+            height: 0px;
+        }
+    }
+
+    scrollbar-color: $primary-kinda-faded rgba(34, 34, 34, 0.15);
+    &::-webkit-scrollbar-thumb {
+        background-color: $primary-kinda-faded;
+    }
+    &::-webkit-scrollbar-track {
+        background-color: rgba(34, 34, 34, 0.15);
+    }
 }

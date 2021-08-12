@@ -91,7 +91,7 @@ html {
 
 main {
     height: 100vh;
-    @include common.themed-scrollbar;
+    @include common.themed-scrollbar($direction: y, $width: thin);
 
     padding: 1.35em 0.8em 0.8em 0.8em;
 

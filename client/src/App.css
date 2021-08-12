@@ -82,13 +82,23 @@ h2 {
 
 main {
   height: 100vh;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: rgba(249, 99, 0, 0.5) transparent;
+  scrollbar-color: rgba(249, 99, 0, 0.5) rgba(34, 34, 34, 0.15);
   padding: 1.35em 0.8em 0.8em 0.8em;
   display: flex;
   flex-flow: column;
   gap: 1.75em;
+}
+main::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+main::-webkit-scrollbar-thumb {
+  background-color: rgba(249, 99, 0, 0.5);
+}
+main::-webkit-scrollbar-track {
+  background-color: rgba(34, 34, 34, 0.15);
 }
 @media (min-width: 1346px) {
   main {

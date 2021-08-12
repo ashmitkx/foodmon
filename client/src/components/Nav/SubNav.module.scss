@@ -14,13 +14,11 @@
     ul {
         display: flex;
         gap: 2.25em;
+        @include common.themed-scrollbar($direction: x, $width: none);
 
         @media (max-width: 800px) {
             gap: 0.8em;
         }
-
-        overflow-x: scroll;
-        scrollbar-width: none;
     }
 
     li {
