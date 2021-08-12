@@ -1,3 +1,4 @@
+import { resolve } from 'path';
 import express from 'express';
 import cors from 'cors';
 import mongoose from 'mongoose';
@@ -36,6 +37,8 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(express.static(resolve('./build')));
+
 app.use('/auth', authRoutes);
 
 // Check if user is authenticated
@@ -48,13 +51,15 @@ app.all('/api/v1/*', authCheck);
 app.use('/api/v1/restaurants', restaurantsRoute);
 app.use('/api/v1/dishes', dishesRoute);
 app.use('/api/v1/user', userRoute);
+app.get('/*', (req, res) => res.sendFile(resolve('./build/index.html')));
 app.use('*', (req, res, next) => next({ status: 404 }));
 
 // custom error handler
 app.use((err, req, res, next) => {
     if (res.headersSent) return next(err);
 
-    res.status(err.status || 500).json({ message: err.message || 'error' });
+    const status = err.status || 500;
+    res.status(status).json({ message: err.message || status });
     console.log('Error:', err);
 });
 

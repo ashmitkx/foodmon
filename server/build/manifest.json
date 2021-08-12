@@ -1,0 +1,30 @@
+{
+    "short_name": "Foodmon",
+    "name": "Foodmon Food Delivery App",
+    "icons": [
+        {
+            "src": "/logos/logo-16x16.png",
+            "type": "image/png",
+            "sizes": "16x16"
+        },
+        {
+            "src": "/logos/logo-32x32.png",
+            "type": "image/png",
+            "sizes": "32x32"
+        },
+        {
+            "src": "/logos/logo-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192"
+        },
+        {
+            "src": "/logos/logo-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#e65d03",
+    "background_color": "#f4f3ed"
+}
