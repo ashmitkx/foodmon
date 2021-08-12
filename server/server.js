@@ -39,6 +39,14 @@ app.use(passport.session());
 
 app.use(express.static(resolve('./build')));
 
+// Upgrade http to https on heroku
+if (process.env.NODE_ENV === 'production')
+    app.use((req, res, next) => {
+        if (req.header('x-forwarded-proto') !== 'https')
+            res.redirect(`https://${req.header('host')}${req.url}`);
+        else next();
+    });
+
 app.use('/auth', authRoutes);
 
 // Check if user is authenticated
