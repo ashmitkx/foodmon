@@ -39,8 +39,8 @@ const GroupedRestaurants = ({ groupby }) => {
     const cuisineEmojis = {
         PIZZA: '🍕',
         CHINESE: '🥡',
-        SANDWICHES: '🥪',
-        BURGERS: '🍔'
+        INDIAN: '🥘',
+        CAFE: '☕'
     };
 
     const [restaurantGroups, setRestaurantGroups] = useState({});
