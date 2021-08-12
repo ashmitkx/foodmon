@@ -28,7 +28,7 @@ const ProfilePage = () => {
         getUserDetails();
     }, []);
 
-    const handleLogOut = () => window.open('http://localhost:5000/auth/logout', '_self');
+    const handleLogOut = () => window.open('/auth/logout', '_self');
 
     return (
         <main>

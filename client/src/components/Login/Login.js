@@ -9,7 +9,7 @@ import Card from '../Layouts/Card';
 const cx = classnames.bind(styles);
 
 const LoginCard = () => {
-    const handleLogIn = () => window.open('http://localhost:5000/auth/google', '_self');
+    const handleLogIn = () => window.open('/auth/google', '_self');
 
     return (
         <>
