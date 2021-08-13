@@ -5,6 +5,7 @@ import classnames from 'classnames/bind';
 
 import vegIcon from '../../images/veg-icon.png';
 import nonVegIcon from '../../images/non-veg-icon.png';
+import { ReactComponent as Cross } from '../../images/cross.svg';
 import { dataAPI } from '../../api.js';
 import { useCartContext } from '../../contexts/CartContext';
 import { FiPlus, FiMinus } from 'react-icons/fi';
@@ -48,7 +49,7 @@ const QuantitySelect = ({ type, dishId, children: quantity }) => {
         case 'recent':
             return (
                 <div className={cx('quantity', '--recent')}>
-                    <span>🞩</span>
+                    <Cross style={{ width: '0.95em' }} />
                     <span>{quantity}</span>
                 </div>
             );

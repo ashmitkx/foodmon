@@ -17,7 +17,7 @@ const RestaurantResults = ({ keyword }) => {
     useEffect(() => {
         const searchRestaurants = async keyword => {
             try {
-                const res = await dataAPI.get(`/restaurants?sortby=rating&&keyword=${keyword}`);
+                const res = await dataAPI.get(`/restaurants?keyword=${keyword}`);
                 setRestaurants(res.data);
             } catch (err) {
                 console.error(err);

@@ -14,32 +14,32 @@
   margin-bottom: 0.75em;
 }
 .cards-display.--overflowing {
-  overflow-y: auto;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(249, 99, 0, 0.5) rgba(34, 34, 34, 0.15);
   flex-grow: 1;
-}
-.cards-display.--overflowing::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
-}
-.cards-display.--overflowing::-webkit-scrollbar-thumb {
-  background-color: rgba(249, 99, 0, 0.5);
-}
-.cards-display.--overflowing::-webkit-scrollbar-track {
-  background-color: rgba(34, 34, 34, 0.15);
 }
 @media (min-width: 1346px) {
   .cards-display.--overflowing {
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(249, 99, 0, 0.5) rgba(34, 34, 34, 0.15);
     margin: -0.8em;
     padding: 0.8em;
+  }
+  .cards-display.--overflowing::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  .cards-display.--overflowing::-webkit-scrollbar-thumb {
+    background-color: rgba(249, 99, 0, 0.5);
+  }
+  .cards-display.--overflowing::-webkit-scrollbar-track {
+    background-color: rgba(34, 34, 34, 0.15);
   }
 }
 
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(23em, 1fr));
-  gap: 1.5em 2em;
+  gap: 1.75em 2em;
 }
 .cards > * {
   width: 100%;

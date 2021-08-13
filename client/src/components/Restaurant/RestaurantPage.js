@@ -14,7 +14,7 @@ import { IoIosArrowBack } from 'react-icons/io';
 const cx = classnames.bind(styles);
 
 const Restaurant = ({ id }) => {
-    const [restaurant, setRestaurant] = useState({ cuisines: [] });
+    const [restaurant, setRestaurant] = useState(undefined);
 
     useEffect(() => {
         const getRestaurant = async id => {
@@ -27,6 +27,8 @@ const Restaurant = ({ id }) => {
         };
         getRestaurant(id);
     }, [id]);
+
+    if (restaurant === undefined) return null;
 
     return (
         <Hero hero img={{ src: restaurant.imgUrl, alt: 'restaurant img' }}>

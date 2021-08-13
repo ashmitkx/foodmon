@@ -16,10 +16,10 @@
     }
 
     &.--overflowing {
-        @include common.themed-scrollbar($direction: y, $width: thin);
         flex-grow: 1;
 
         @media (min-width: 1346px) {
+            @include common.themed-scrollbar($direction: y, $width: thin);
             margin: -0.8em;
             padding: 0.8em;
         }
@@ -29,7 +29,7 @@
 .cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(23em, 1fr));
-    gap: 1.5em 2em;
+    gap: 1.75em 2em;
 
     & > * {
         width: 100%;

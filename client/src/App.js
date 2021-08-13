@@ -73,7 +73,7 @@ const App = () => {
                 </ConditionalRoute>
                 {width <= 1345 && (
                     <ConditionalRoute path='/cart' condition={isAuth} redirect='/login'>
-                        <Cart seperatePage />
+                        <Cart />
                     </ConditionalRoute>
                 )}
                 <ConditionalRoute path='/restaurant/:id' condition={isAuth} redirect='/login'>

@@ -35,3 +35,18 @@
   height: 1.75em;
   color: #e65d03;
 }
+.main-nav li {
+  position: relative;
+}
+
+.tot-items {
+  position: absolute;
+  right: 0.75em;
+  top: 0.75em;
+  z-index: 9999;
+  padding: 0.1em 0.35em;
+  background: #e65d03;
+  color: #f2f2f2;
+  border-radius: 10px;
+  font-size: 0.75rem;
+}

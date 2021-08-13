@@ -14,22 +14,20 @@
     flex-flow: column;
     gap: 1.25em;
 
+    @media (max-width: 1345px) {
+        width: initial;
+        position: initial;
+        @include common.themed-scrollbar($direction: y, $width: thin);
+    }
+
     // For Main-Nav at the left
-    @media (min-width: 541px) {
+    @media (min-width: 541px) and (max-width: 1344px) {
         margin-left: 4.25rem;
     }
 
     // For Main-Nav at the bottom
     @media (max-width: 540px) {
         padding-bottom: 5.5rem;
-    }
-
-    @media (max-width: 1345px) {
-        height: initial;
-        position: initial;
-
-        min-height: 100vh;
-        width: 100%;
     }
 }
 
