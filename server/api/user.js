@@ -41,6 +41,7 @@ const getUserCart = async (req, res, next) => {
 const getUserRecent = async (req, res, next) => {
     const recent = req.user.toObject().recent;
     const dishIds = recent.map(dish => dish._id);
+    const limit = req.query.limit || 10; // limit the number of orders sent
 
     // Get dish objects using dishIds
     let dishes;
@@ -61,14 +62,19 @@ const getUserRecent = async (req, res, next) => {
 
     // Group recent dishes by the added date
     const groupedRecent = {};
+    let groupCount = 0;
     let prevDate;
-    fullRecent.forEach(dish => {
+    fullRecent.some(dish => {
         const date = dish.added.getTime();
 
         // If the current date is beyond 500ms from the last one, create a new date group.
         // If the current date is within 500ms from the last one, added it to that last dish's date group.
         if (Math.abs(date - prevDate) > 500 || !prevDate) {
-            if (!groupedRecent[date]) groupedRecent[date] = [];
+            if (!groupedRecent[date]) {
+                groupCount++;
+                if (groupCount > limit) return true; // return limited number of most recent orders
+                groupedRecent[date] = [];
+            }
             prevDate = date;
         }
         groupedRecent[prevDate].push(dish);

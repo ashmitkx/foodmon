@@ -10,8 +10,38 @@ const isValidObjectId = mongoose.isValidObjectId;
     The list of restaurants can be grouped by the first cuisine in each restaurant's cuisines array.
 */
 const getRestaurants = async (req, res, next) => {
-    let query = {};
-    if (req.query.keyword) query = { $text: { $search: req.query.keyword } };
+    const limit = req.query.limit || 20; // limit the number of restaurants sent
+
+    let aggregate,
+        query = {};
+    if (req.query.keyword) {
+        aggregate = true;
+        query = [
+            {
+                $search: {
+                    index: 'search-restaurants',
+                    compound: {
+                        should: [
+                            {
+                                autocomplete: {
+                                    query: req.query.keyword,
+                                    path: 'name',
+                                    tokenOrder: 'sequential'
+                                }
+                            },
+                            {
+                                text: {
+                                    query: req.query.keyword,
+                                    path: { wildcard: '*' }
+                                }
+                            }
+                        ]
+                    }
+                }
+            },
+            { $limit: limit }
+        ];
+    }
 
     let sortby = {};
     if (req.query.sortby) {
@@ -20,15 +50,15 @@ const getRestaurants = async (req, res, next) => {
         else if (sortbyQuery === 'distance') sortby = { distance: 1 };
     }
 
-    const groupby = req.query.groupby;
-
     let doc;
     try {
-        doc = await Restaurants.find(query).sort(sortby).lean();
+        if (aggregate) doc = await Restaurants.aggregate(query);
+        else doc = await Restaurants.find(query).sort(sortby).limit(limit).lean();
     } catch (e) {
         return next(e);
     }
 
+    const groupby = req.query.groupby;
     switch (groupby) {
         // Group restaurants by the first cuisine of each restaurant's cuisines array, if specified.
         case 'cuisine': {
