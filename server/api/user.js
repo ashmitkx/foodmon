@@ -3,7 +3,7 @@ import Dishes from '../models/dish.js';
 
 const isValidObjectId = mongoose.isValidObjectId;
 
-const getUserDetails = async (req, res, next) => {
+const getUserDetails = (req, res, next) => {
     const { name, email, imgUrl } = req.user.toObject();
     res.json({ name, email, imgUrl });
 };
@@ -104,7 +104,7 @@ const addToUserCart = async (req, res, next) => {
     // The quantity need not be specified, as it defaults to 1.
     user.cart.push({ _id: dishId });
     try {
-        user.save();
+        await user.save();
     } catch (err) {
         return next(err);
     }
@@ -149,7 +149,7 @@ const updateUserCart = async (req, res, next) => {
     else user.cart[index].quantity = quantity;
 
     try {
-        user.save();
+        await user.save();
     } catch (err) {
         return next(err);
     }
@@ -170,7 +170,7 @@ const emptyUserCart = async (req, res, next) => {
     user.cart = [];
 
     try {
-        user.save();
+        await user.save();
     } catch (err) {
         return next(err);
     }
