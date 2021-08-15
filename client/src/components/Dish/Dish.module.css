@@ -43,7 +43,7 @@
   min-width: 5.5em;
 }
 .quantity.--disabled {
-  filter: opacity(0.8);
+  filter: opacity(0.7);
 }
 .quantity span {
   flex-grow: 1;

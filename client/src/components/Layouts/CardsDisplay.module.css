@@ -1,7 +1,7 @@
 .cards-display {
   display: flex;
   flex-flow: column;
-  gap: 1em;
+  gap: 0.8em;
 }
 @media (max-width: 875px) {
   .cards-display {
