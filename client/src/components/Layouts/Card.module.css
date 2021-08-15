@@ -7,10 +7,16 @@
   gap: 1.25em;
 }
 .card .img {
-  width: 6em;
-  height: 6em;
   border-radius: 12px;
   flex-shrink: 0;
+  width: 5.75em;
+  height: 5.75em;
+}
+@media (max-width: 540px) {
+  .card .img {
+    width: 5.25em;
+    height: 5.25em;
+  }
 }
 .card .details {
   flex-grow: 1;

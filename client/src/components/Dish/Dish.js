@@ -55,7 +55,7 @@ const QuantitySelect = ({ type, dishId, children: quantity }) => {
             );
         case 'edit':
             return (
-                <div className={cx('quantity')}>
+                <div className={cx('quantity', { '--disabled': loading })}>
                     <button onClick={() => onUpdate(1)} disabled={loading}>
                         <FiPlus />
                     </button>
@@ -71,7 +71,11 @@ const QuantitySelect = ({ type, dishId, children: quantity }) => {
             );
         case 'add':
             return (
-                <button className={cx('quantity')} onClick={onAdd} disabled={loading}>
+                <button
+                    className={cx('quantity', { '--disabled': loading })}
+                    onClick={onAdd}
+                    disabled={loading}
+                >
                     <FiPlus />
                     <span>Add</span>
                 </button>

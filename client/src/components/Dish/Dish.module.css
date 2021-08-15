@@ -42,6 +42,9 @@
 .quantity.--recent {
   min-width: 5.5em;
 }
+.quantity.--disabled {
+  filter: opacity(0.8);
+}
 .quantity span {
   flex-grow: 1;
   font-weight: 500;
