@@ -50,6 +50,15 @@ const App = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isAuth]);
 
+    // Intercept 401 errors and set isAuth to false
+    dataAPI.interceptors.response.use(
+        response => response,
+        error => {
+            if (error.response.status === 401) setIsAuth(false);
+            return Promise.reject(error);
+        }
+    );
+
     if (isAuth === undefined) return null;
 
     return (

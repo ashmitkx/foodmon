@@ -41,6 +41,11 @@
   grid-template-columns: repeat(auto-fill, minmax(21.75em, 1fr));
   gap: 1.5em 2em;
 }
+@media (max-width: 540px) {
+  .cards {
+    row-gap: 1.25em;
+  }
+}
 .cards > * {
   width: 100%;
   max-width: 28em;
