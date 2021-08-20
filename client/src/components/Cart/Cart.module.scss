@@ -31,7 +31,7 @@
     }
 }
 
-.empty {
+.centered {
     flex-grow: 1;
     padding-bottom: 15%;
 
@@ -39,7 +39,13 @@
     flex-flow: column;
     justify-content: center;
     align-items: center;
-    gap: 0.7em;
+    gap: 0.6em;
+
+    svg {
+        height: 4em;
+        width: 4em;
+        color: common.$primary;
+    }
 
     .title {
         color: common.$primary;
@@ -51,6 +57,10 @@
         color: common.$text-faded;
         font-size: 1.25rem;
     }
+}
+
+.mount-anim {
+    @include common.mount-anim;
 }
 
 .prices,

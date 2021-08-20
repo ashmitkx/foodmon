@@ -8,6 +8,18 @@ $text-white: #f2f2f2;
 
 $card-shadow: 0px 8px 20px 1px rgba(170, 170, 170, 0.3);
 
+@mixin mount-anim {
+    animation: mount-anim 250ms cubic-bezier(0.05, 0.89, 0.35, 0.95);
+    @keyframes mount-anim {
+        from {
+            transform: scale(80%);
+        }
+        to {
+            transform: scale(100%);
+        }
+    }
+}
+
 @mixin themed-scrollbar($direction, $width) {
     @if $direction == y {
         overflow-y: auto;

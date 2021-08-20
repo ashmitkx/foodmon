@@ -1,9 +1,11 @@
+import { useEffect, useState } from 'react';
 import styles from './Cart.module.css';
 import classnames from 'classnames/bind';
 
 import { dataAPI } from '../../api.js';
 import { useCartContext } from '../../contexts/CartContext';
 import { RiShoppingBag3Line } from 'react-icons/ri';
+import { MdDone } from 'react-icons/md';
 import Dish from '../Dish/Dish.js';
 import CardsDisplay from '../Layouts/CardsDisplay';
 import Titlebar from '../Titlebar.js/Titlebar';
@@ -16,10 +18,21 @@ const UndefinedCart = () => (
     </section>
 );
 
+const OrderPlaced = () => (
+    <section className={cx('cart')}>
+        <Titlebar icon={<RiShoppingBag3Line />}>My Cart</Titlebar>
+        <div className={cx('centered', 'mount-anim')}>
+            <MdDone />
+            <span className={cx('title')}>Order placed successfully!</span>
+            <span className={cx('subtitle')}>Check the Recents tab</span>
+        </div>
+    </section>
+);
+
 const EmptyCart = () => (
     <section className={cx('cart')}>
         <Titlebar icon={<RiShoppingBag3Line />}>My Cart</Titlebar>
-        <div className={cx('empty')}>
+        <div className={cx('centered')}>
             <span className={cx('title')}>No dishes in your cart, yet.</span>
             <span className={cx('subtitle')}>Order something to eat!</span>
         </div>
@@ -28,9 +41,14 @@ const EmptyCart = () => (
 
 const Cart = () => {
     const [cart, dispatchCart] = useCartContext();
+    const [orderPlaced, setOrderPlaced] = useState(false);
+
+    useEffect(() => {
+        if (cart?.length !== 0) setOrderPlaced(false);
+    }, [cart]);
 
     if (cart === undefined) return <UndefinedCart />;
-    if (cart.length === 0) return <EmptyCart />;
+    if (cart.length === 0) return orderPlaced ? <OrderPlaced /> : <EmptyCart />;
 
     const totItems = cart.reduce((acc, dish) => acc + dish.quantity, 0);
     const subTot = cart.reduce((acc, dish) => acc + dish.price * dish.quantity, 0);
@@ -40,6 +58,7 @@ const Cart = () => {
         try {
             await dataAPI.delete('/user/cart');
             dispatchCart({ type: 'empty' });
+            setOrderPlaced(true);
         } catch (err) {
             console.error(err);
         }
