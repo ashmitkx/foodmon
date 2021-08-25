@@ -1,74 +1,65 @@
-# Food Ordering App
+# <img src="./readme-images/logo-32x32.png" width="28"/> Foodmon
 
-by ashmitkx
+**[Foodmon App on Heroku](https://foodmon-app.herokuapp.com)**, log in using BITS Mail.
 
-# Getting Started with Create React App
+Foodmon (name derived from nodemon), is a food ordering web app to find something to eat. \
+You can browse restaurants, browse their menus of dishes, add dishes to your cart, modify quantities, and place your order! \
+The web app supports both desktop and mobile devices.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Made for Devsoc, with ❤ by Ashmit.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+### Browse Restaurants
 
-### `npm start`
+Browse restaurants in the Top Rated, Nearby and Cuisine tabs.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+<img src="./readme-images/home-top-rated.png" width="800"/>
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+_Top Rated tab_
 
-### `npm test`
+<br/>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img src="./readme-images/home-cuisines.png" width="800"/>
 
-### `npm run build`
+_Cuisines tab_
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Browse Restaurant Menus
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Browse dishes in the various sections of each restaurant's menu. Add your favourite dishes to your cart.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+<img src="./readme-images/restaurant-page.png" width="800"/>
 
-### `npm run eject`
+### Search for Restaurants and Dishes
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+Find your favourite restaurants and dishes.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+<img src="./readme-images/search-dishes.png" width="800"/>
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+### View your Cart
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+See what you added, modify quantities, review the total price, and place your order!
 
-## Learn More
+<img src="./readme-images/cart.png" height="600"/>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### View your recent orders
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+See when and what your ordered recently.
 
-### Code Splitting
+<img src="./readme-images/recent.png" width="800"/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Things I learnt while making Foodmon
 
-### Analyzing the Bundle Size
+### First time I've fully worked on the backend
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Express, middleware, routing, and some error handling. \
+MongoDB, queries/aggregation, searching, mongoose, and schemas. \
+Passportjs + Google oauth authentication, and session cookies. \
+Using Postman more effectively.
 
-### Making a Progressive Web App
+### Learnt more about using React and CSS
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Component composition and SCSS modules for cleaner code. \
+Context API, custom hooks, and reducers. \
+Responsive layouts using media queries and a custom hook. \
+Adding proper login/logout using backend authentication and cookies.
