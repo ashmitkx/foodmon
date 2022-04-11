@@ -1,6 +1,6 @@
 # <img src="./readme-images/logo-32x32.png" width="28"/> Foodmon
 
-**[Foodmon App on Heroku](https://foodmon-app.herokuapp.com)**, log in using BITS Mail.
+**[Foodmon App on Heroku](https://foodmon-external.herokuapp.com/)**.
 
 Foodmon (name derived from nodemon), is a food ordering web app to find something to eat. \
 You can browse restaurants, browse their menus of dishes, add dishes to your cart, modify quantities, and place your order! \
